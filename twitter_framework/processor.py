@@ -44,13 +44,3 @@ class Preprocessor:
 
     def _remove_repeats(self, text):
         return ''.join(''.join(s)[:2] for _, s in groupby(text))
-
-
-
-p = Preprocessor()
-a = p.process_tweet('This is a cooool #dummysmiley: :-) :-P <3 and some arrows < > -> <-- http://www.dskjf.com')
-import nltk
-for x in a:
-    print(x)
-print(nltk.pos_tag(a))
-print(nltk.tag.pos_tag(a))

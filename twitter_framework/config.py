@@ -1,4 +1,5 @@
 __author__ = 'tyler'
-
-API_KEY = 'pRrETTmweKlUIphB3fp5AfXUA'
-API_SECRET = 'RHztKSvgvg1eoSYqCDmknCkqSjdwKVip7cPoUxRxSXkH5OkpdU'
+CONSUMER_KEY = 'cq3qz75G66aozHGt6z3QNd8He'
+CONSUMER_SECRET= '4ZoDfKY2gjr5Od6mjoK1TXFk0bgOcFjxiDs2zTQkVW67UehEKn'
+API_KEY = '490980933-aeo9Bj7nION3QTaQWtXaHM40OyEAEsmqeJbfWn1m'
+API_SECRET = 'nkSaepRLM2DKJDYg0mytgcorQ8XkIrw0F56DlgkXaErWw'
