@@ -1,4 +1,44 @@
 *.conf
+*.gnip
+*.log
+
+# C extensions
+gnip_search/*.so
+
+# Packages
+*.egg
+*.egg-info
+gnip_search/dist
+gnip_search/build
+gnip_search/eggs
+gnip_search/parts
+gnip_search/bin
+gnip_search/var
+gnip_search/sdist
+gnip_search/develop-eggs
+gnip_search/.installed.cfg
+gnip_search/lib
+gnip_search/lib64
+
+# Installer logs
+gnip_search/pip-log.txt
+
+# Unit test / coverage reports
+gnip_search/.coverage
+gnip_search/.tox
+gnip_search/nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+gnip_search/.mr.developer.cfg
+gnip_search/.project
+gnip_search/.pydevproject
+gnip_search/MANIFEST
+
+
+
 
 
 # Compiled source #

@@ -3,8 +3,9 @@ __author__ = 'tyler'
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 import logging
+import os
 import json
-import pykafka
+#import pykafka
 import tweepy
 
 logger = logging.getLogger(__name__)
@@ -12,7 +13,7 @@ logger.setLevel(logging.DEBUG)
 fh = logging.FileHandler(__name__+'.log')
 fh.setLevel(logging.WARNING)
 logger.addHandler(fh)
-logger.addHandler(RotatingFileHandler('hilldog.json', maxBytes=5*(10**6), backupCount=5))
+logger.addHandler(RotatingFileHandler('data/centipede.json', maxBytes=5*(10**8), backupCount=100))
 
 
 
@@ -44,7 +45,6 @@ class StreamListener(tweepy.StreamListener):
         time.sleep(60)
 
     def on_warning(self, notice):
-        print(notice)
         try:
             if notice['percent_full'] >= 90:
                 logger.critical('Fell behind at: %s' % datetime.now())
@@ -61,8 +61,8 @@ class Streamer:
         self.stream = None
 
     def _build_stream(self):
-        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-        auth.set_access_token(API_KEY, API_SECRET)
+        auth = tweepy.OAuthHandler(os.getenv('CONSUMER_KEY2'), os.getenv('CONSUMER_SECRET2'))
+        auth.set_access_token(os.getenv('API_KEY2'), os.getenv('API_SECRET2'))
         self.stream = tweepy.Stream(auth=auth, listener=self.listener)
 
 
@@ -72,8 +72,8 @@ class Streamer:
 
 
 
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-auth.set_access_token(API_KEY, API_SECRET)
+auth = tweepy.OAuthHandler(os.getenv('CONSUMER_KEY2'), os.getenv('CONSUMER_SECRET2'))
+auth.set_access_token(os.getenv('API_KEY2'), os.getenv('API_SECRET2'))
 stream = tweepy.Stream(auth=auth, listener=StreamListener(None))
-stream.filter(track=['hillaryclintion', 'hillary', "hillary's" 'clinton', "clinton's"], languages=['en'])
+stream.filter(track=[], languages=['en'], async=True)
 
