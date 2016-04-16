@@ -29,6 +29,7 @@ twitter_framework/config.py
 *.log
 *.sql
 *.sqlite
+*.sqlite3
 
 # OS generated files #
 ######################
