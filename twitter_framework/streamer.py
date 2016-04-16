@@ -1,6 +1,5 @@
 __author__ = 'tyler'
 
-from config import CONSUMER_KEY, CONSUMER_SECRET, API_KEY, API_SECRET
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 import logging
@@ -76,5 +75,5 @@ class Streamer:
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(API_KEY, API_SECRET)
 stream = tweepy.Stream(auth=auth, listener=StreamListener(None))
-stream.filter(track=['hillary', "hillary's" 'clinton', "clinton's"], languages=['en'])
+stream.filter(track=['hillaryclintion', 'hillary', "hillary's" 'clinton', "clinton's"], languages=['en'])
 
