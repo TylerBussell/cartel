@@ -1,0 +1,23 @@
+<div class="page-header" ng-controller="AnalysisViewCtrl">
+	<div style="width: 274px; margin: 0 auto">	
+		<p>Enter a Query: <input id="queryInput"></input></p>
+	</div>
+	<highchart id="chart1" config="highchartsNG" style="width: 98%"></highchart>
+	<br>
+	<div style="padding: 0% 1% 0% 1%">
+	  <table ng-table="tableParams" class="table table-bordered ng-table-responsive">
+	      <tr ng-repeat="post in $data">
+	          <td align="center" data-title="'Link'" sortable="'User'">
+	              <a ng-href="https://twitter.com/{{post.link}}" target="_blank">{{post.link}}</a>
+	          </td>
+	          <td align="center" data-title="'Text'" sortable="'text'">
+	              {{post.text}}
+	          </td>
+	          <!--<td align="center" data-title="'Reply'">
+	          	<a href="https://twitter.com/share" class="twitter-share-button" data-via="FMA_TEST">Tweet</a>
+	          </td>-->
+	      </tr>
+	  </table>
+	</div>
+</div>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
