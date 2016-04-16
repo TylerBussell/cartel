@@ -18,8 +18,6 @@ reload(sys)
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
 sys.stdin = codecs.getreader('utf-8')(sys.stdin)
 
-#remove this
-requests.packages.urllib3.disable_warnings()
 
 # formatter of data from API 
 TIME_FORMAT_SHORT = "%Y%m%d%H%M"
@@ -252,8 +250,6 @@ class Query(object):
                     'query': pt_filter
             }
         self.rule_payload["maxResults"] = int(max_results)
-        if not self.search_v2:
-            self.rule_payload["publisher"] = "twitter"
         if start:
             self.rule_payload["fromDate"] = self.fromDate
         if end:
@@ -262,8 +258,7 @@ class Query(object):
         self.stream_url = self.end_point
         if count_bucket:
             # remove "maxResults parameter for search v2 queries to counts endpoint
-            if self.search_v2:
-                del self.rule_payload["maxResults"]
+            del self.rule_payload["maxResults"]
             if not self.end_point.endswith("counts.json"): 
                 self.stream_url = self.end_point[:-5] + "/counts.json"
             if count_bucket not in ['day', 'minute', 'hour']:
