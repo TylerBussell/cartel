@@ -2,24 +2,39 @@ __author__ = 'tyler'
 
 from config import CONSUMER_KEY, CONSUMER_SECRET, API_KEY, API_SECRET
 from datetime import datetime
+from logging.handlers import RotatingFileHandler
 import logging
+import json
+import pykafka
 import tweepy
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.WARNING)
-logger.addHandler(logging.FileHandler(__name__+'.log'))
+logger.setLevel(logging.DEBUG)
+fh = logging.FileHandler(__name__+'.log')
+fh.setLevel(logging.WARNING)
+logger.addHandler(fh)
+logger.addHandler(RotatingFileHandler('hilldog.json', maxBytes=5*(10**6), backupCount=5))
+
 
 
 class StreamListener(tweepy.StreamListener):
+
+    def __init__(self, kafka_client):
+        self.client = kafka_client
+        super().__init__()
 
 
     def on_status(self, status):
         data = {}
 
-        data['uid'] = status.user.id_str
+        data['uid'] = status.user.screen_name
         data['tid'] = status.id_str
-        data['time'] = status.created_at
+        data['created_at'] = str(status.created_at)
         data['text'] = status.text
+        # client = pykafka.KafkaClient()
+        # topic = client.topics['tweets']
+        # with topic.get_producer() as prod:
+        logger.debug(json.dumps(data))
 
     def on_error(self, status_code):
         logger.critical('Error: %s %s' % (status_code, datetime.now()))
@@ -30,6 +45,7 @@ class StreamListener(tweepy.StreamListener):
         time.sleep(60)
 
     def on_warning(self, notice):
+        print(notice)
         try:
             if notice['percent_full'] >= 90:
                 logger.critical('Fell behind at: %s' % datetime.now())
@@ -40,13 +56,25 @@ class StreamListener(tweepy.StreamListener):
 
 class Streamer:
 
+    def __init__(self, listener, filters):
+        self.listener = listener
+        self.filters = filters
+        self.stream = None
 
-    def __init__(self, stream, producer):
-        self.stream = stream
-        self.producer = producer
+    def _build_stream(self):
+        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth.set_access_token(API_KEY, API_SECRET)
+        self.stream = tweepy.Stream(auth=auth, listener=self.listener)
 
 
-# auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-# auth.set_access_token(API_KEY, API_SECRET)
-# stream = tweepy.Stream(auth=auth, listener=StreamListener())
+    def execute(self):
+        self.stream.filter(track=self.filters, languages=['en'])
+
+
+
+
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(API_KEY, API_SECRET)
+stream = tweepy.Stream(auth=auth, listener=StreamListener(None))
+stream.filter(track=['hillary', "hillary's" 'clinton', "clinton's"], languages=['en'])
 
