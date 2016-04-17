@@ -6,7 +6,8 @@ angular.module('myApp', [
   'myApp.homepage',
   'myApp.analysisView',
   'myApp.version',
-  'myApp.cartelServices'
+  'myApp.cartelServices',
+  'myApp.teampage'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/homepage'});

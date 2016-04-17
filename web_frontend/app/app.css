@@ -121,6 +121,14 @@ psuedo element with clearfix and display: table; , all after (which is why I kno
 	display: inline-block;
 }
 
+.team-card2 {
+	width: 300px;
+	margin-left: 95px;
+	text-align: center;
+	margin-right: auto;
+	display: inline-block;
+}
+
 .card-image {
 	height: 300px;
 	width: 300px
