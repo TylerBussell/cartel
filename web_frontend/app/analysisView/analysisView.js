@@ -40,7 +40,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable"])
         xAxis: {
             categories: [
                 'Jan',
-                'Feb',
+                'hot',
                 'Mar',
                 'Apr',
                 'May',

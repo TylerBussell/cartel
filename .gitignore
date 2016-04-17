@@ -1,6 +1,8 @@
 *.conf
 *.gnip
 *.log
+#Data
+training_set.csv
 
 # C extensions
 gnip_search/*.so

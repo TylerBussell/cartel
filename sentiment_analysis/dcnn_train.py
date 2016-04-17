@@ -6,7 +6,7 @@ A Convolutional Neural Network for Modeling Sentence
 """
 import sys, os, time
 import pdb
-
+import csv
 import math, random
 import numpy as np
 import theano
@@ -269,7 +269,7 @@ def train_and_test(args, print_config):
     # get the data    #
     ###################
     datasets = load_data(args.corpus_path)
-    
+    # data = list(csv.reader(open(args.corpus_path, 'r')))
     train_set_x, train_set_y = datasets[0]
     dev_set_x, dev_set_y = datasets[1]
     test_set_x, test_set_y = datasets[2]
