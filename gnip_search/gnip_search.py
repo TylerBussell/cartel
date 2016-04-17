@@ -79,14 +79,19 @@ class GnipSearchCMD():
             return config
         else:
             return None
+    def _check_type(self, val):
+        val = int(val)
+        if val < 0:
+            raise argparse.ArgumentTypeError("%s must be a positive int value" % val)
+        return val
 
     def args(self):
         twitter_parser = argparse.ArgumentParser(
                 description="GnipSearch supports the following use cases: %s"%str(self.USE_CASES))
         twitter_parser.add_argument("use_case", metavar= "USE_CASE", choices=self.USE_CASES, 
                 help="Use case for this search.")
-        twitter_parser.add_argument("-a", "--paged", dest="paged", action="store_true", 
-                default=False, help="Paged access to ALL available results (Warning: this makes many requests)")
+        twitter_parser.add_argument("-a", "--paged", dest="paged", type=int,
+                help="Paged access to N pages of tweets (maxResult will be set to 500)")
         twitter_parser.add_argument("-c", "--csv", dest="csv_flag", action="store_true", 
                 default=False,
                 help="Return comma-separated 'date,counts' or geo data.")
