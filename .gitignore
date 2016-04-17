@@ -37,8 +37,8 @@ gnip_search/.project
 gnip_search/.pydevproject
 gnip_search/MANIFEST
 
-
-
+#Node Modules
+web_frontend/node_modules
 
 
 # Compiled source #
