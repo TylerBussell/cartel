@@ -1,7 +1,11 @@
 <div class="page-header" ng-controller="AnalysisViewCtrl">
-	<div style="width: 400px; margin: 0 auto">	
-		<p>Enter a Query: <input id="queryInput"></input><button style="margin-left: 5px;" ng-click="runQuery()">Submit Query</button></p>
+	<div style="margin: 0 auto; text-align: center">	
+		<p style="display: inline-block;">Enter a Query: <input id="queryInput"></input></p>
+		<p style="display: inline-block; margin-left: 5px">Start Date: <input style="width: 90px; padding-left: 5px" type="text" id="datepickerStart"></p>
+		<p style="display: inline-block; margin-left: 5px">End Date: <input style="width: 90px; padding-left: 5px" type="text" id="datepickerEnd"></p>
+		<button style="display: inline-block; margin-left: 5px" ng-click="runQuery()">Submit Query</button>
 	</div>
+	<br>
 	<highchart id="chart1" config="highchartsNG" style="width: 98%"></highchart>
 	<br>
 	<div style="padding: 0% 1% 0% 1%">

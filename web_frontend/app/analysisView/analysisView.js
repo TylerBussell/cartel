@@ -79,4 +79,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable"])
     	console.log("Run Query Button Clicked");
     };
     
+    $(function() {
+        $( "#datepickerStart" ).datepicker( { dateFormat: 'dd-mm-yy' } );
+        $( "#datepickerEnd" ).datepicker( { dateFormat: 'dd-mm-yy' } );
+    });
 }]);
