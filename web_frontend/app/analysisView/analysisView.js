@@ -75,4 +75,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable"])
         data: data
     });
     
+    $scope.runQuery = function() {
+    	console.log("Run Query Button Clicked");
+    };
+    
 }]);
