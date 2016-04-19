@@ -4,12 +4,12 @@ from django.db import models
 # myapp/models.py
 
 import uuid
+import datetime
 from cassandra.cqlengine import columns
 from cassandra.cqlengine.models import Model
 
 class Tweet(Model):
-    id = columns.UUID(primary_key = True, default=uuid.uuid4)
+    created = columns.DateTime(required = True, primary_key = True, default = datetime.datetime.now())
+    sentiment = columns.Float()
     candidate = columns.Text(required = True)
-    created = columns.DateTime(required = True)
-    sentiment = columns.Integer()
     text = columns.Text(required = True)
