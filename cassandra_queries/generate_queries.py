@@ -33,7 +33,7 @@ class Database:
             elif columns[i].colType == 'string':
                 query += '\'' + random.choice(string_values) + '\''  
             elif columns[i].colType == 'datetime':
-                query += str(int(round(time.time() * 1000)) + iteration)
+                query += str(iteration)
 
             if i != len(table.columns) - 1:
                 query += ','

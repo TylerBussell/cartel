@@ -10,6 +10,8 @@ from cassandra.cqlengine.models import Model
 
 class Tweet(Model):
     candidate = columns.Text(required = True, primary_key = True)
-    created = columns.DateTime(required = True, primary_key = True, default = datetime.datetime.now())
+    created_at = columns.Integer(required = True, primary_key = True)
     sentiment = columns.Float()
     text = columns.Text(required = True)
+    user = columns.Text(required = False)
+    tid = columns.Text(required = False)
