@@ -31,7 +31,7 @@
 
 .navbar-default {
     background-color: #AD0000;
-    background-image: linear-gradient(120deg, #AD0000, #FF0000);
+    background-image: linear-gradient(120deg, #E60000, #AD0000, #003399);
     border-color: #820000;
 }
 
@@ -41,12 +41,12 @@
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-    color: #CCCCCC;
+    color: #FFF;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-    color: #CCCCCC;
+    color: #FFF;
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -61,8 +61,6 @@
 }
 
 .map-title {
-	margin: 0 auto;
-    width: 12%;
     font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
 	font-size: 35px;
 	font-style: normal;

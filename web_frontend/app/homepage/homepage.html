@@ -1,10 +1,27 @@
-<div class="page-header" ng-controller="HomepageCtrl">	
-	<h1 style="width: 30.5%; margin: 0 auto">Welcome to TrumpQuery!</h1>
-	<br>
-	<h3 style="width: 22%; margin: 0 auto">"Make Twitter Great Again!"</h3>
-	<br>
+<div class="page-header" style="text-align: center;" ng-controller="HomepageCtrl">	
 	<div style="width: 500px; margin: 0 auto">
-		<img src="img/donald-trump.jpeg" style="width: 500px; height: 500px;">
+		<img src="img/site_logo.jpg" style="width: 400px; height: 200px;">
+	</div>
+	<br>
+	<h1 class="map-title">Welcome to Twittical!</h1>
+	<br>
+	<h3>Our Project tracks the sentiment of tweets associated with the political candidates</h3>
+	<br>
+	<div style="margin: 0 auto; text-align: center">	
+		<div class="input-group margin-bottom-sm" style="width:700px; margin: 0 auto;">
+	 		 <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+	  		 <input id="queryInput" class="form-control" type="text" placeholder="Enter A Term To Query" style="width:300px;">
+	  		 
+	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+	  		 <input id="datepickerStart" class="form-control" type="text" placeholder="Enter A Start Date" style="width:150px;">
+	  		 
+	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+	  		 <input id="datepickerEnd" class="form-control" type="text" placeholder="Enter An End Date" style="width:150px;">
+		</div>
+		<br>
+		<a class="btn btn-default btn-sm" ng-click="runQuery()">
+  			<i class="fa fa-bar-chart" aria-hidden="true"></i> Submit Query</a>
+		<!-- <button style="display: inline-block; margin-left: 5px" ng-click="runQuery()">Submit Query</button> -->
 	</div>
 	<br>
 </div>
