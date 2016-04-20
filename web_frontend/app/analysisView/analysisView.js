@@ -13,6 +13,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable"])
                                  function($scope, NgTableParams, cartelAPITrump, cartelAPIHillary, cartelAPIBernie, cartelAPICruz, cartelAPIDemocrat, cartelAPIRepublican, $http, $routeParams) {
 
 	$scope.dataLoaded = false;
+	$scope.hideChart = true;
 	
 	var view = $routeParams.viewParam;
 	
@@ -65,7 +66,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable"])
     		break;
     	case "cruz":
     		$scope.chartTitle = "Ted Cruz";
-    		cartelAPITCruz.queryAll()
+    		cartelAPICruz.queryAll()
 	    		.$promise.then(
 	    			function( value ) {
 	    				$scope.tableData = value;
@@ -145,6 +146,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable"])
     	    }
     	
     	$scope.dataLoaded = true;
+    	$scope.hideChart = false;
 
     }
     
