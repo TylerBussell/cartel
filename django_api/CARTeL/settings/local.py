@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django_api.wsgi.application'
+WSGI_APPLICATION = 'CARTeL.wsgi.application'
 
 
 # Database
