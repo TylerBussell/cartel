@@ -11,7 +11,6 @@ from cassandra.cqlengine.models import Model
 class Candidate(Model):
 
     __abstract__ = True
-    __keyspace__ = 'prod_db'
 
     candidate = columns.Text(required = True, primary_key = True)
     created_at = columns.Integer(required = True, primary_key = True)
