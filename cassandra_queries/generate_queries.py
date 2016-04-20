@@ -2,7 +2,7 @@ import sys, time, random
 
 int_values = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
-string_values = ['Trump','Hilary','Bernie',]
+string_values = ['Trump','Hillary','Bernie',]
 
 class Column:
     def __init__(self, name, colType):
@@ -33,7 +33,7 @@ class Database:
             elif columns[i].colType == 'string':
                 query += '\'' + random.choice(string_values) + '\''  
             elif columns[i].colType == 'datetime':
-                query += str(int(round(time.time() * 1000)) + iteration)
+                query += str(iteration)
 
             if i != len(table.columns) - 1:
                 query += ','
