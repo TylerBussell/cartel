@@ -12,7 +12,7 @@
 		</div>
 		<br>
 		<a class="btn btn-default btn-sm" ng-click="runQuery()">
-  			<i class="fa fa-bar-chart" aria-hidden="true"></i> Submit Query</a>
+  			<i class="fa" aria-hidden="true"></i> Submit Query</a>
 		<!-- <button style="display: inline-block; margin-left: 5px" ng-click="runQuery()">Submit Query</button> -->
 	</div>
 	<br>
@@ -21,6 +21,12 @@
 	</p>
 	<div id="statisticDiv">
 		<highchart id="chart1" config="highchartsNG" style="width: 98%"></highchart>
+		<div style="margin: 0 auto; text-align: center">	
+			<a class="btn btn-default btn-sm" ng-click="toogleLine()">
+  				<i class="fa fa-line-chart" aria-hidden="true"></i> Basic Line</a>
+  			<a class="btn btn-default btn-sm" ng-click="toogleBar()">
+  				<i class="fa fa-bar-chart" aria-hidden="true"></i> Bar Chart</a>
+		</div>
 		<br>
 		<div style="padding: 0% 1% 0% 1%">
 		  <table ng-table="tableParams" class="table table-bordered ng-table-responsive">

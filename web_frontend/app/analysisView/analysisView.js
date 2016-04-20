@@ -116,6 +116,26 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable"])
     
     };
     
+    $scope.toogleLine = function() {
+    	$scope.highchartsNG.options = {
+    	    chart: {
+    	        type: 'line',
+    	        marginTop: 50
+    	    }
+    	}
+    	$scope.$apply();
+    }
+    
+    $scope.toogleBar = function() {
+    	$scope.highchartsNG.options = {
+    	    chart: {
+    	        type: 'column',
+    	        marginTop: 50
+    	    }
+    	}
+    	$scope.$apply();
+    }
+    
     $(function() {
         $( "#datepickerStart" ).datepicker( { dateFormat: 'dd-mm-yy' } );
         $( "#datepickerEnd" ).datepicker( { dateFormat: 'dd-mm-yy' } );
