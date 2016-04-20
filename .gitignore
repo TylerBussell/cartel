@@ -3,7 +3,7 @@
 *.log
 #Data
 training_set.csv
-sentiment_analysis/data/twitter.pkl
+sentiment_analysis/data/*
 # C extensions
 gnip_search/*.so
 
