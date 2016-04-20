@@ -79,9 +79,10 @@ class GnipSearchCMD():
             return config
         else:
             return None
+
     def _check_type(self, val):
         val = int(val)
-        if val < 0:
+        if val < 1:
             raise argparse.ArgumentTypeError("%s must be a positive int value" % val)
         return val
 
