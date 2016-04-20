@@ -1,19 +1,16 @@
 <div class="page-header" ng-controller="AnalysisViewCtrl">
 	<div style="margin: 0 auto; text-align: center">	
-		<div class="input-group margin-bottom-sm" style="width:700px; margin: 0 auto;">
-	 		 <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-	  		 <input id="queryInput" class="form-control" type="text" placeholder="Enter A Term To Query" style="width:300px;">
+		<div class="input-group margin-bottom-sm" style="width:300px; margin: 0 auto;">
 	  		 
 	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
 	  		 <input id="datepickerStart" class="form-control" type="text" placeholder="Enter A Start Date" style="width:150px;">
 	  		 
 	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
 	  		 <input id="datepickerEnd" class="form-control" type="text" placeholder="Enter An End Date" style="width:150px;">
+	  		 
+	  		 <span class="input-group-btn">
+        	<button class="btn btn-secondary" type="button">Change Dates</button>
 		</div>
-		<br>
-		<a class="btn btn-default btn-sm" ng-click="runQuery()">
-  			<i class="fa" aria-hidden="true"></i> Submit Query</a>
-		<!-- <button style="display: inline-block; margin-left: 5px" ng-click="runQuery()">Submit Query</button> -->
 	</div>
 	<br>
 	<p class="text-center" ng-hide="dataLoaded">
@@ -22,27 +19,27 @@
 	<div id="statisticDiv">
 		<highchart id="chart1" config="highchartsNG" style="width: 98%"></highchart>
 		<div style="margin: 0 auto; text-align: center">	
-			<a class="btn btn-default btn-sm" ng-click="toogleLine()">
+			<a class="btn btn-default btn-sm" ng-click="toggleLine()">
   				<i class="fa fa-line-chart" aria-hidden="true"></i> Basic Line</a>
-  			<a class="btn btn-default btn-sm" ng-click="toogleBar()">
+  			<a class="btn btn-default btn-sm" ng-click="toggleBar()">
   				<i class="fa fa-bar-chart" aria-hidden="true"></i> Bar Chart</a>
 		</div>
 		<br>
-		<div style="padding: 0% 1% 0% 1%">
+		<!--<div style="padding: 0% 1% 0% 1%">
 		  <table ng-table="tableParams" class="table table-bordered ng-table-responsive">
 		      <tr ng-repeat="post in $data">
-		          <td align="center" data-title="'Link'" sortable="'User'">
-		              <a ng-href="https://twitter.com/{{post.link}}" target="_blank">{{post.link}}</a>
+		          <td align="center" data-title="'user'" sortable="'user'">
+		              <a ng-href="https://twitter.com/{{post.user}}" target="_blank">{{post.user}}</a>
 		          </td>
 		          <td align="center" data-title="'Text'" sortable="'text'">
 		              {{post.text}}
 		          </td>
-		          <!--<td align="center" data-title="'Reply'">
-		          	<a href="https://twitter.com/share" class="twitter-share-button" data-via="FMA_TEST">Tweet</a>
-		          </td>-->
+		          <td align="center" data-title="'Sentiment'" sortable="'sentiment'">
+		              {{post.sentiment.toFixed(2)}}
+		          </td>
 		      </tr>
 		  </table>
-		</div>
+		</div>-->
 	</div>
 </div>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
