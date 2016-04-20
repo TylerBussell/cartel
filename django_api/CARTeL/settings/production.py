@@ -24,9 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '12345'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.compute.amazonaws.com']
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 
 # Application definition
@@ -35,6 +38,7 @@ INSTALLED_APPS = [
     'api',
     'django_cassandra_engine',
     'rest_framework',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +48,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -95,7 +101,7 @@ DATABASES = {
             },
             'connection': {
                 'retry_connect': True,
-                'consistency': ConsistencyLevel.ALL
+                'consistency': ConsistencyLevel.ONE
             },
             'session': {
                 'default_timeout': 15

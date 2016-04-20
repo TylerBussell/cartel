@@ -12,12 +12,22 @@ class Candidate(Model):
 
     __abstract__ = True
 
-    candidate = columns.Text(required = True, primary_key = True)
-    created_at = columns.Integer(required = True, primary_key = True)
-    sentiment = columns.Float(required = False)
-    text = columns.Text(required = True)
-    user = columns.Text(required = False)
-    tid = columns.Text(required = False)
+    candidate = columns.Text(required=True, primary_key=True)
+    created_at = columns.DateTime(required=True, primary_key=True)
+    sentiment = columns.Float(required=False)
+    text = columns.Text(required=True)
+    user = columns.Text(required=False)
+    tid = columns.Text(required=False)
+    anger = columns.Float(required=False)
+    disgust = columns.Float(required=False)
+    fear = columns.Float(required=False)
+    joy = columns.Float(required=False)
+    sadness = columns.Float(required=False)
+    openness = columns.Float(required=False)
+    conscientiousness = columns.Float(required=False)
+    extraversion = columns.Float(required=False)
+    agreeableness = columns.Float(required=False)
+    range = columns.Float(required=False)
 
 
 class Bernie(Candidate):
@@ -37,3 +47,14 @@ class Dem(Candidate):
 
 class Rep(Candidate):
     __table_name__ = 'republican'
+
+class Aggregate(Model):
+    __table_name__ = 'aggregate'
+
+    candidate = columns.Text(required=True, primary_key = True)
+    datetime_block = columns.Integer(required=True, primary_key = True)
+    count_pos_sentiment = columns.Float(required=False)
+    count_neg_sentiment = columns.Float(required=False)
+    avg_pos_sentiment = columns.Float(required=False)
+    avg_neg_sentiment = columns.Float(required=False)
+

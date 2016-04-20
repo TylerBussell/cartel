@@ -2,8 +2,13 @@
 *.gnip
 *.log
 #Data
+<<<<<<< HEAD
+analysis/sentiment_analysis/data
+analysis/sentiment_analysis/sample/*.p
+=======
 training_set.csv
-
+sentiment_analysis/data/*
+>>>>>>> feature/sentiment
 # C extensions
 gnip_search/*.so
 

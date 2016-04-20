@@ -1,6 +1,6 @@
 import sys, time, random
 
-int_values = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
+float_values = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
 string_values = ['Trump','Hillary','Bernie',]
 
@@ -28,12 +28,12 @@ class Database:
         query += ') VALUES('
 
         for i in range(len(table.columns)):
-            if columns[i].colType == 'int':
-                query += str(random.choice(int_values))          
+            if columns[i].colType == 'float':
+                query += str(random.choice(float_values))          
             elif columns[i].colType == 'string':
                 query += '\'' + random.choice(string_values) + '\''  
             elif columns[i].colType == 'datetime':
-                query += str(iteration)
+                query += str(int(round(time.time() * 1000)) + iteration)
 
             if i != len(table.columns) - 1:
                 query += ','
@@ -43,15 +43,22 @@ class Database:
 
     def create_insert(self, num, tableNo):
         for i in range(num):
-            print self._create_insert(self.tables[tableNo], i)
+            print(self._create_insert(self.tables[tableNo], i))
 
 columns = []
-columns.append(Column('created', 'datetime'))
 columns.append(Column('candidate', 'string'))
-columns.append(Column('sentiment', 'int'))
+columns.append(Column('created_at', 'datetime'))
+columns.append(Column('sentiment', 'float'))
 columns.append(Column('text', 'string'))
-table = Table('tweet', columns)
-testDB = Database('db', [table])
+columns.append(Column('user', 'string'))
+columns.append(Column('tid', 'string'))
+tables = [Table('bernie', columns), Table('cruz', columns), Table('hillary', columns), Table('trump', columns), Table('democrat', columns), Table('republican', columns)]
+testDB = Database('db', tables)
 testDB.create_insert(int(sys.argv[1]), 0)
+testDB.create_insert(int(sys.argv[1]), 1)
+testDB.create_insert(int(sys.argv[1]), 2)
+testDB.create_insert(int(sys.argv[1]), 3)
+testDB.create_insert(int(sys.argv[1]), 4)
+testDB.create_insert(int(sys.argv[1]), 5)
 
             

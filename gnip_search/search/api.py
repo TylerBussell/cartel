@@ -156,7 +156,7 @@ class Query(object):
                 raise ValueError("Invalid request\nQuery: %s\nResponse: %s"%(self.rule_payload, doc))
             if len(acs) < self.hard_max:
                 repeat = False
-                if self.paged or (count_bucket and self.search_v2):
+                if page_count <= self.paged or (count_bucket and self.search_v2):
                     if len(acs) > 0:
                         if self.output_file_path is not None:
                             # writing to file
@@ -347,7 +347,7 @@ if __name__ == "__main__":
     pg = Query("shendrickson@gnip.com"
             , "XXXXXPASSWORDXXXXX"
             , "https://search.gnip.com/accounts/shendrickson/search/wayback.json"
-            , paged = True 
+            , paged = 5
             , output_file_path = "../data/")
     now_date = datetime.datetime.now()
     pg.execute("bieber"
