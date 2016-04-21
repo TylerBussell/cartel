@@ -59,5 +59,10 @@ def candidate_list(request, candidate_name):
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def bernie_list(request):
-    return candidate_list(request, 'Bernie')                                                                                                                                                            
+    return candidate_list(request, 'Bernie')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def bernie_list(request):
+    return candidate_list(request, 'Cruz')                                                                                                                                                             
             
