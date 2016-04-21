@@ -64,5 +64,10 @@ def bernie_list(request):
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def bernie_list(request):
-    return candidate_list(request, 'Cruz')                                                                                                                                                             
+    return candidate_list(request, 'Cruz') 
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def bernie_list(request):
+    return candidate_list(request, 'Hillary')                                                                                                                                                             
             
