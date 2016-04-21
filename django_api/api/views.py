@@ -51,6 +51,7 @@ def candidate_list(request, candidate_name):
             candidate.text = serializer.data['text']
             candidate.user = serializer.data['user']
             candidate.tid = serializer.data['tid']
+            candidate.tone = serializer.data['tone']
             candidate.save()
             return Response(
                 status=status.HTTP_201_CREATED
