@@ -25,6 +25,8 @@
   				<i class="fa fa-bar-chart" aria-hidden="true"></i> Bar Chart</a>
 		</div>
 		<br>
+		<br>
+		<hr style="margin: 0 auto; width: 90%">
 		<!--<div style="padding: 0% 1% 0% 1%">
 		  <table ng-table="tableParams" class="table table-bordered ng-table-responsive">
 		      <tr ng-repeat="post in $data">
@@ -40,10 +42,21 @@
 		      </tr>
 		  </table>
 		</div>-->
-		<div style="text-align: center">
-			<div data-ng-repeat="tweet in tableData" style="display: inline-block; margin-left: 7px">
-				<twitter-widget twitter-widget-id="'617749885933232128'">
-				</twitter-widget>
+		<div style="text-align: center; margin: 0 auto; width: 1020px;">
+			<br>
+			<h3>Latest Tweets For {{chartTitle}}</h3>
+			<br>
+			<div style="text-align: center; display: inline-block; vertical-align:top;">
+				<div data-ng-repeat="tweetID in tweetIDs1 track by $index">
+					<twitter-widget twitter-widget-id="tweetID" twitter-widget-options="{}">
+					</twitter-widget>
+				</div>
+			</div>
+			<div style="text-align: center; display: inline-block; margin-left: 10px">
+				<div data-ng-repeat="tweetID in tweetIDs2 track by $index">
+					<twitter-widget twitter-widget-id="tweetID" twitter-widget-options="{}">
+					</twitter-widget>
+				</div>
 			</div>
 		</div>
 	</div>

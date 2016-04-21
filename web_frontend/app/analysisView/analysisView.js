@@ -106,6 +106,20 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     }
     
     $scope.buildChart = function() {
+    	
+    	$scope.tweetIDs1 = [];
+    	$scope.tweetIDs2 = [];
+    	
+    	var tweetsLength = $scope.tableData.length
+    	
+    	for (var i = 0; i < tweetsLength; i++) {
+    		if ( i < (tweetsLength / 2) ) {
+    			$scope.tweetIDs1.push($scope.tableData[i].tid);
+    		} else {
+    			$scope.tweetIDs2.push($scope.tableData[i].tid);
+    		}
+    	}	
+    	
     	$scope.highchartsNG = {
     	        options: {
     	            chart: {
