@@ -41,16 +41,9 @@
 		  </table>
 		</div>-->
 		<div style="text-align: center">
-			<div data-ng-repeat="tweet in tableData" id="DIV_1">
-				<h4 id="H4_2">
-					{{tweet.candidate}}
-				</h4>
-				<p id="P_3">
-					{{tweet.text}}
-				</p>
-				<p style="display:inline-block">User: </p>
-				<a href="#" id="A_4">{{tweet.user}}</a>
-				<p style="display: inline-block">Result: {{tweet.sentiment.toFixed(2)}}</p>
+			<div data-ng-repeat="tweet in tableData" style="display: inline-block; margin-left: 7px">
+				<twitter-widget twitter-widget-id="'617749885933232128'">
+				</twitter-widget>
 			</div>
 		</div>
 	</div>

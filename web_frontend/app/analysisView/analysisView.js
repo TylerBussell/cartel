@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable"])
+angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ngtweet'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/analysisView/:viewParam', {
