@@ -12,13 +12,13 @@ class Candidate(Model):
 
     __abstract__ = True
 
-    candidate = columns.Text(required = True, primary_key = True)
-    created_at = columns.DateTime(required = True, primary_key = True)
-    sentiment = columns.Float(required = False)
-    text = columns.Text(required = True)
-    user = columns.Text(required = False)
-    tid = columns.Text(required = False)
-
+    candidate = columns.Text(required=True, primary_key=True)
+    created_at = columns.DateTime(required=True, primary_key=True)
+    sentiment = columns.Float(required=False)
+    text = columns.Text(required=True)
+    user = columns.Text(required=False)
+    tid = columns.Text(required=False)
+    tone = columns.Map(key_type=columns.Text, value_type=columns.Float, required=False)
 
 class Bernie(Candidate):
     __table_name__ = 'bernie'
