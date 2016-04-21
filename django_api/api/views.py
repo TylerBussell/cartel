@@ -63,20 +63,25 @@ def bernie_list(request):
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
-def bernie_list(request):
+def cruz_list(request):
     return candidate_list(request, 'Cruz') 
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
-def bernie_list(request):
+def hillary_list(request):
     return candidate_list(request, 'Hillary')
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
-def bernie_list(request):
+def trump_list(request):
     return candidate_list(request, 'Trump')
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
-def bernie_list(request):
+def democrat_list(request):
     return candidate_list(request, 'Democrat')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def republican_list(request):
+    return candidate_list(request, 'Republican')
