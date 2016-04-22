@@ -52,8 +52,13 @@ columns.append(Column('sentiment', 'float'))
 columns.append(Column('text', 'string'))
 columns.append(Column('user', 'string'))
 columns.append(Column('tid', 'string'))
-table = Table('bernie', columns)
-testDB = Database('db', [table])
+tables = [Table('bernie', columns), Table('cruz', columns), Table('hillary', columns), Table('trump', columns), Table('democrat', columns), Table('republican', columns)]
+testDB = Database('db', tables)
 testDB.create_insert(int(sys.argv[1]), 0)
+testDB.create_insert(int(sys.argv[1]), 1)
+testDB.create_insert(int(sys.argv[1]), 2)
+testDB.create_insert(int(sys.argv[1]), 3)
+testDB.create_insert(int(sys.argv[1]), 4)
+testDB.create_insert(int(sys.argv[1]), 5)
 
             
