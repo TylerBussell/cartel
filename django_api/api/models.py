@@ -18,7 +18,13 @@ class Candidate(Model):
     text = columns.Text(required=True)
     user = columns.Text(required=False)
     tid = columns.Text(required=False)
-    tone = columns.Map(key_type=columns.Text, value_type=columns.Float, required=False)
+    anger = columns.Float(required=False)
+    disgust = columns.Float(required=False)
+    fear = columns.Float(required=False)
+    joy = columns.Float(required=False)
+    sadness = columns.Float(required=False)
+
+
 
 class Bernie(Candidate):
     __table_name__ = 'bernie'
