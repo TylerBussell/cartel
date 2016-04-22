@@ -95,7 +95,7 @@ DATABASES = {
             },
             'connection': {
                 'retry_connect': True,
-                'consistency': ConsistencyLevel.ONEs
+                'consistency': ConsistencyLevel.ONE
             },
             'session': {
                 'default_timeout': 15

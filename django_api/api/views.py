@@ -16,9 +16,9 @@ def get_candidate_instance(candidate_name):
     elif candidate_name == 'Trump':
         return Trump()
     elif candidate_name == 'Democrat':
-        return Democrat()
+        return Demo()
     elif candidate_name == 'Republican':
-        return Republican()
+        return Rep()
 
 
 def get_candidate(candidate_name):
@@ -31,9 +31,9 @@ def get_candidate(candidate_name):
     elif candidate_name == 'Trump':
         return Trump
     elif candidate_name == 'Democrat':
-        return Democrat
+        return Dem
     elif candidate_name == 'Republican':
-        return Republican
+        return Rep
 
 
 def candidate_list(request, candidate_name):
