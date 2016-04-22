@@ -32,6 +32,9 @@ def analyze_tone(candidate, in_fn, out_fn):
                 out_f.write('\n')
             except Exception as e:
                 print(e.args, i)
+                in_data.update({'candidate':candidate, 'sentiment':-1.0})
+                json.dump(in_data, out_f)
+                out_f.write('\n')
 
 
 analyze_tone('trump', '/home/ubuntu/centipede.json.1', '/home/ubuntu/tone_test_file')
