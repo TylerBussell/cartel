@@ -26,6 +26,7 @@ def analyze_tone(candidate, in_fn, out_fn):
 
             out_data.update(in_data)
             out_data['user'] = out_data.pop('uid')
+            out_data['range'] = out_data.pop('emotional range')
             json.dump(out_data, out_f)
 
 analyze_tone('trump', '/home/tyler/centipede.json.1', 'tone_test_file')

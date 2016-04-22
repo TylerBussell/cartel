@@ -23,7 +23,11 @@ class Candidate(Model):
     fear = columns.Float(required=False)
     joy = columns.Float(required=False)
     sadness = columns.Float(required=False)
-
+    openness = columns.Float(required=False)
+    conscientiousness = columns.Float(required=False)
+    extraversion = columns.Float(required=False)
+    agreeableness = columns.Float(required=False)
+    range = columns.Float(required=False)
 
 
 class Bernie(Candidate):
