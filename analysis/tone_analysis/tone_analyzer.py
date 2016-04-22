@@ -37,7 +37,7 @@ def analyze_tone(candidate, in_fn, out_fn):
                 out_f.write('\n')
 
 
-analyze_tone('trump', '/home/ubuntu/centipede.json.1', '/home/ubuntu/tone_test_file')
+analyze_tone('trump', '/home/ubuntu/data/centipede.json.1', '/home/ubuntu/data/tone_test_file')
 
 
 
