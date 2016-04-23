@@ -4,16 +4,6 @@ import interface
 import json
 import argparse
 
-
-parser = argparse.ArgumentParser()
-parser.add_argument('input',
-                    nargs=1,
-                    help='Full path to jsonl file')
-parser.add_argument('output',
-                    nargs=1,
-                    help='Full path to output file')
-args = parser.parse_args()
-
 def analyze(args):
     with open(args.input, 'r') as in_f, open(args.output, 'a') as out_f:
         for line in in_f:
@@ -26,10 +16,8 @@ def analyze(args):
 if __name__ == 'main':
     parser = argparse.ArgumentParser()
     parser.add_argument('input',
-                        nargs=1,
                         help='Full path to jsonl file')
     parser.add_argument('output',
-                        nargs=1,
                         help='Full path to output file')
     args = parser.parse_args()
     analyze(args)
