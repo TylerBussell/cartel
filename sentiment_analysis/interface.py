@@ -7,7 +7,7 @@ import pickle
 
 
 # config variables
-model      = "sample/myFirstModel.p"
+model      = "sample/third.p"
 preprocess = True
 load_word_vecs = True
 

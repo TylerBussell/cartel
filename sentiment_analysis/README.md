@@ -1,3 +1,6 @@
+# Model
+Download [this](https://www.dropbox.com/s/4caxe70mmldor7x/third.p?dl=0)(~700MB) and place in sample folder.
+
 # Requirements:
 
 - `sudo apt-get install unzip curl git gcc g++ python2.7 python-virtualenv build-essential python-dev python-setuptools libatlas-dev libatlas3gf-base gfortran libblas-dev liblapack-dev python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose`
