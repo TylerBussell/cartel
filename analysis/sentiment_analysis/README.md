@@ -1,5 +1,5 @@
 # Model
-Download [this](https://www.dropbox.com/s/4caxe70mmldor7x/third.p?dl=0)(~700MB) and place in sample folder.
+Download [this](https://www.dropbox.com/s/umhp88624tomkm6/third.p?dl=0) (~700MB) and place in sample folder.
 
 # Requirements:
 
