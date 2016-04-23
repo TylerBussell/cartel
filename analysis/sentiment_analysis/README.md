@@ -1,3 +1,5 @@
+CNN (Convolutional Neural Network) based text classifier, based off [this](http://arxiv.org/abs/1408.5882) and [this](https://github.com/flipkart-incubator/optimus), trained on 100k+ tweets with consistent accuracy of 84%.
+
 # Model
 Download [this](https://www.dropbox.com/s/umhp88624tomkm6/third.p?dl=0) (~700MB) and place in sample folder.
 
@@ -10,6 +12,8 @@ Download [this](https://www.dropbox.com/s/umhp88624tomkm6/third.p?dl=0) (~700MB)
 
 # Usage
 Training:
+
+Please use theano flags to fast-run this on a GPU. Saves the planet and your hair. Just prepend your python command with something like: `THEANO_FLAGS=mode=FAST_RUN,device=gpu`
 
 `python train.py <model config file path> <training data file path> <file path to store classifier model> <true/false(preprocessing flag)>`
 
