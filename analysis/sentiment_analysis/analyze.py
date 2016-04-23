@@ -4,8 +4,8 @@ import interface
 import json
 import argparse
 
-def analyze(args):
-    with open(args.input, 'r') as in_f, open(args.output, 'a') as out_f:
+def analyze(input, output):
+    with open(input, 'r') as in_f, open(output, 'a') as out_f:
         for line in in_f:
             in_data = json.loads(line)
             sent = interface.predictTweet(in_data['text'])
@@ -20,7 +20,7 @@ if __name__ == 'main':
     parser.add_argument('output',
                         help='Full path to output file')
     args = parser.parse_args()
-    analyze(args)
+    analyze(args.input, args.output)
 
 
 
