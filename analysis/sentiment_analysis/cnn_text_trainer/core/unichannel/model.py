@@ -72,8 +72,6 @@ class TextCNNModel(object):
             dataset = self.get_idx_from_sent(sentence["text"])
             datasets.append(dataset)
         datasets=np.array(datasets,dtype="int32")
-        print "lds",len(datasets)
-        print "dss",np.shape(datasets[0])
         return self._classify(datasets)
 
     def get_idx_from_sent(self, sent):
