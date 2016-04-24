@@ -52,7 +52,7 @@ class Aggregate(Model):
     __table_name__ = 'aggregate'
 
     candidate = columns.Text(required=True, primary_key = True)
-    datetime_block = columns.Text(required=True, primary_key = True)
+    datetime_block = columns.Integer(required=True, primary_key = True)
     count_pos_sentiment = columns.Float(required=False)
     count_neg_sentiment = columns.Float(required=False)
     avg_pos_sentiment = columns.Float(required=False)
