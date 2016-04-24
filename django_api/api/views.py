@@ -41,21 +41,6 @@ def candidate_list(request, candidate_name):
         candidate = get_candidate(candidate_name).objects.all()[:50]
         serializer = CandidateSerializer(candidate, many=True)                                                                                                                                      
         return Response(serializer.data)
-    elif request.method == 'POST':
-        candidate = get_candidate_instance(candidate_name)
-        serializer = CandidateSerializer(data=request.DATA)
-        if serializer.is_valid():
-            candidate.candidate = serializer.data['candidate']
-            candidate.created_at = serializer.data['created_at']
-            candidate.sentiment = serializer.data['sentiment']
-            candidate.text = serializer.data['text']
-            candidate.user = serializer.data['user']
-            candidate.tid = serializer.data['tid']
-            candidate.tone = serializer.data['tone']
-            candidate.save()
-            return Response(
-                status=status.HTTP_201_CREATED
-            )
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
