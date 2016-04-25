@@ -40,6 +40,19 @@
 		      </tr>
 		  </table>
 		</div>-->
+		<div style="text-align: center">
+			<div data-ng-repeat="tweet in tableData" id="DIV_1">
+				<h4 id="H4_2">
+					{{tweet.candidate}}
+				</h4>
+				<p id="P_3">
+					{{tweet.text}}
+				</p>
+				<p style="display:inline-block">User: </p>
+				<a href="#" id="A_4">{{tweet.user}}</a>
+				<p style="display: inline-block">Result: {{tweet.sentiment.toFixed(2)}}</p>
+			</div>
+		</div>
 	</div>
 </div>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

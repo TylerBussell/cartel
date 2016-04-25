@@ -1,0 +1,71 @@
+#DIV_1 {
+    box-sizing: border-box;
+    color: rgb(55, 58, 60);
+    height: 192px;
+    max-width: 320px;
+    position: relative;
+    width: 320px;
+    column-rule-color: rgb(55, 58, 60);
+    perspective-origin: 160px 96px;
+    transform-origin: 160px 96px;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 4px 4px 4px 4px;
+    font: normal normal normal normal 16px / 24px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 12px 12px 12px;
+    outline: rgb(55, 58, 60) none 0px;
+    padding: 20px;
+    display: inline-block;
+}/*#DIV_1*/
+
+#H4_2 {
+    box-sizing: border-box;
+    color: rgb(55, 58, 60);
+    height: 26px;
+    width: 278px;
+    column-rule-color: rgb(55, 58, 60);
+    perspective-origin: 139px 13px;
+    transform-origin: 139px 13px;
+    border: 0px none rgb(55, 58, 60);
+    font: normal normal 500 normal 24px / 26.4px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 0px 12px;
+    outline: rgb(55, 58, 60) none 0px;
+}/*#H4_2*/
+
+#P_3 {
+    box-sizing: border-box;
+    color: rgb(55, 58, 60);
+    height: 72px;
+    width: 278px;
+    column-rule-color: rgb(55, 58, 60);
+    perspective-origin: 139px 36px;
+    transform-origin: 139px 36px;
+    border: 0px none rgb(55, 58, 60);
+    font: normal normal normal normal 16px / 24px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 0px 16px;
+    outline: rgb(55, 58, 60) none 0px;
+}/*#P_3*/
+
+#A_4 {
+    box-sizing: border-box;
+    color: rgb(2, 117, 216);
+    text-decoration: none;
+    touch-action: manipulation;
+    column-rule-color: rgb(2, 117, 216);
+    border: 0px none rgb(2, 117, 216);
+    font: normal normal normal normal 16px / 24px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(2, 117, 216) none 0px;
+}/*#A_4*/
+
+#A_5 {
+    box-sizing: border-box;
+    color: rgb(2, 117, 216);
+    text-decoration: none;
+    touch-action: manipulation;
+    column-rule-color: rgb(2, 117, 216);
+    border: 0px none rgb(2, 117, 216);
+    font: normal normal normal normal 16px / 24px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 0px 0px 20px;
+    outline: rgb(2, 117, 216) none 0px;
+}/*#A_5*/
+
