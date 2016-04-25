@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="components/ng-table/dist/ng-table.min.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <!--<link rel="stylesheet" href="components/angular-bootstrap/ui-bootstrap-csp.css">-->
   <link rel="stylesheet" href="components/font-awesome-4.6.1/css/font-awesome.min.css">
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -38,7 +39,12 @@
        
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="#analysisView">Query</a></li>
+          <li><a href="#analysisView/trump">Trump</a></li>
+          <li><a href="#analysisView/clinton">Clinton</a></li>
+          <li><a href="#analysisView/sanders">Sanders</a></li>
+          <li><a href="#analysisView/cruz">Cruz</a></li>
+          <li><a href="#analysisView/democrat">Democrat</a></li>
+          <li><a href="#analysisView/republican">Republican</a></li>
           <li><a href="#view2">How It Works</a></li>
           <li><a href="#teampage">Team</a></li>
         </ul>
@@ -71,6 +77,9 @@
   <script src="components/angular-sanitize/angular-sanitize.js"></script>
   <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
   <script src="components/highcharts-ng/highcharts-ng.min.js"></script>
+  <script src="components/ngtweet/dist/ngtweet.min.js"></script>
+  <!--<script src="components/angular-bootstrap/ui-bootstrap.js"></script>-->
+  <!--<script src="components/angular-materialize/src/angular-materialize.js"></script>-->
   <script>
 	  $('.navbar li').click(function(e) {
 		    $('.navbar li.active').removeClass('active');

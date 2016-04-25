@@ -9,6 +9,8 @@ angular.module('myApp', [
   'myApp.cartelServices',
   'myApp.teampage'
 ]).
-config(['$routeProvider', function($routeProvider) {
+config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
   $routeProvider.otherwise({redirectTo: '/homepage'});
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
