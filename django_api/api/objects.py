@@ -55,3 +55,25 @@ class CandidateObject(object):
         self.extraversion = extraversion
         self.agreeableness = agreeableness
         self.range = range
+
+class AggregateObject(object):
+
+    def __init__(self, subject, content, **attrs):
+        if 'candidate' in attrs:
+            self.candidate = attrs['candidate']
+        if 'datetime_block' in attrs:
+            self.candidate = attrs['datetime_block']
+        if 'count_pos_sentiment' in attrs:
+            self.candidate = attrs['count_pos_sentiment']
+        if 'count_neg_sentiment' in attrs:
+            self.candidate = attrs['count_neg_sentiment']
+        if 'avg_pos_sentiment' in attrs:
+            self.candidate = attrs['avg_pos_sentiment']
+        if 'avg_neg_sentiment' in attrs:
+            self.candidate = attrs['avg_neg_sentiment']
+        self.candidate = candidate
+        self.datetime_block = datetime_block
+        self.count_pos_sentiment = count_pos_sentiment
+        self.count_neg_sentiment = count_neg_sentiment
+        self.avg_pos_sentiment = avg_pos_sentiment
+        self.avg_neg_sentiment = avg_neg_sentiment

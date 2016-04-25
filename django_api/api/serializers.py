@@ -30,3 +30,21 @@ class CandidateSerializer(serializers.Serializer):
             instance.agreeableness = attrs.get('agreeableness', instance.agreeableness)
             instance.range = attrs.get('range', instance.range)
         return CandidateObject(**attrs)
+
+class AggregateSerializer(serializers.Serializer):
+    candidate = serializers.CharField(required = True)
+    datetime_block = serializers.IntegerField(required = True)
+    count_pos_sentiment = serializers.IntegerField(required = False)
+    count_neg_sentiment = serializers.IntegerField(required = False)
+    avg_pos_sentiment = serializers.FloatField(required = False)
+    avg_neg_sentiment = serializers.FloatField(required = False)
+
+    def restore_object(self, attrs, instance = None):
+        if instance is not None:
+            instance.candidate = attrs.get('candidate', instance.candidate)
+            instance.datetime_block = attrs.get('datetime_block', instance.datetime_block)
+            instance.count_pos_sentiment = attrs.get('count_pos_sentiment', instance.count_pos_sentiment)
+            instance.count_neg_sentiment = attrs.get('count_neg_sentiment', instance.count_neg_sentiment)
+            instance.avg_pos_sentiment = attrs.get('avg_pos_sentiment', instance.avg_pos_sentiment)
+            instance.avg_neg_sentiment = attrs.get('avg_neg_sentiment', instance.avg_neg_sentiment)
+        return AggregateObject(**attrs)
