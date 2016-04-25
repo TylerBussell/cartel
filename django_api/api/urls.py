@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^cruz/$', views.cruz_list, name='tweets_list'),
     url(r'^democrat/$', views.democrat_list, name='tweets_list'),
     url(r'^republican/$', views.republican_list, name='tweets_list'),
+    url(r'^aggregate/$', views.aggregate_list, name='aggregate_list'),
 ]

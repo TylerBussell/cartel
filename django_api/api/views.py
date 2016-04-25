@@ -38,7 +38,7 @@ def get_candidate(candidate_name):
 
 def candidate_list(request, candidate_name):
     if request.method == 'GET':
-        candidate = get_candidate(candidate_name).objects.all()[:50]
+        candidate = get_candidate(candidate_name).objects.all()[:30]
         serializer = CandidateSerializer(candidate, many=True)                                                                                                                                      
         return Response(serializer.data)
 
@@ -71,3 +71,11 @@ def democrat_list(request):
 @permission_classes((AllowAny,))
 def republican_list(request):
     return candidate_list(request, 'Republican')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_list(request) :
+    if request.method == 'GET':
+        aggregate = Aggregate.objects.all()
+        serializer = AggregateSerializer(aggregate, many=True)                                                                                                                                      
+        return Response(serializer.data)

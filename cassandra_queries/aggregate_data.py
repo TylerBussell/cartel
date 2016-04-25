@@ -48,7 +48,7 @@ cluster = Cluster([sys.argv[1]])
 session = cluster.connect(sys.argv[2])
 
 index = 0
-time = datetime(year = 2016, month = 04, day = 16)
+time = datetime(year = 2016, month = 4, day = 16)
 time += timedelta(hours = 1)
 now = datetime.utcnow()
 timediff = now - time
