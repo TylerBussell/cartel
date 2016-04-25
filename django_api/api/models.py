@@ -14,10 +14,10 @@ class Candidate(Model):
 
     candidate = columns.Text(required=True, primary_key=True)
     created_at = columns.DateTime(required=True, primary_key=True)
+    tid = columns.BigInt(required=True, primary_key=True)
     sentiment = columns.Float(required=False)
     text = columns.Text(required=True)
     user = columns.Text(required=False)
-    tid = columns.Text(required=False)
     anger = columns.Float(required=False)
     disgust = columns.Float(required=False)
     fear = columns.Float(required=False)
@@ -53,8 +53,8 @@ class Aggregate(Model):
 
     candidate = columns.Text(required=True, primary_key = True)
     datetime_block = columns.Integer(required=True, primary_key = True)
-    count_pos_sentiment = columns.Float(required=False)
-    count_neg_sentiment = columns.Float(required=False)
+    count_pos_sentiment = columns.Integer(required=False)
+    count_neg_sentiment = columns.Integer(required=False)
     avg_pos_sentiment = columns.Float(required=False)
     avg_neg_sentiment = columns.Float(required=False)
 
