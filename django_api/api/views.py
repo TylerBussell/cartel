@@ -79,6 +79,7 @@ def aggregate_list(request, candidate) :
             aggregate = Aggregate.objects.filter(candidate = candidate)
         else:
             aggregate = Aggregate.objects.all()
+        aggregate = (agg for agg in aggregate if agg.count_neg_sentiment + agg.count_pos_sentiment > 0)
         serializer = AggregateSerializer(aggregate, many=True)                                                                                                                                      
         return Response(serializer.data)
 
