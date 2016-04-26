@@ -14,11 +14,14 @@
 		</div>
 	</div>
 	<br>
+	<br>
 	<p class="text-center" ng-hide="dataLoaded">
-    	<i class="fa fa-spinner fa-pulse fa-3x" style="margin-top: 50px; margin-bottom: 50px;"></i>
+    	<i class="fa fa-spinner fa-pulse fa-3x" style="margin-top: 50px; margin-bottom: 50px; color: white;"></i>
 	</p>
 	<div id="statisticDiv" ng-hide="hideChart">
-		<highchart id="chart1" config="highchartsNG" style="width: 95%; margin-left: 2.5%"></highchart>
+		<highchart id="chart1" config="highchartsNG" style="width: 95%; margin-left: 2%"></highchart>
+		<br>
+		<br>
 		<div style="margin: 0 auto; text-align: center">	
 			<a class="btn btn-default btn-sm" ng-click="toggleLine()">
   				<i class="fa fa-line-chart" aria-hidden="true"></i> Basic Line</a>
@@ -26,8 +29,6 @@
   				<i class="fa fa-bar-chart" aria-hidden="true"></i> Bar Chart</a>
 		</div>
 		<br>
-		<br>
-		<hr style="margin: 0 auto; width: 90%">
 		<!--<div style="padding: 0% 1% 0% 1%">
 		  <table ng-table="tableParams" class="table table-bordered ng-table-responsive">
 		      <tr ng-repeat="post in $data">
@@ -43,7 +44,7 @@
 		      </tr>
 		  </table>
 		</div>-->
-		<div style="text-align: center; margin: 0 auto; width: 1020px;">
+		<div style="text-align: center; margin: 0 auto; width: 80%;">
 			<br>
 			<h3>Latest Tweets For {{chartTitle}}</h3>
 			<br>

@@ -23,6 +23,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     
     $scope.chartTitle = null;
     $scope.tableData = null;
+    $scope.color = null;
     
     switch (view) {
     	case "trump":
@@ -31,7 +32,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	    		.$promise.then(
 	    			function( value ) {
 	    				$scope.tableData = value;
-	    				$scope.buildChart();
+	    				$scope.color = "#C6151D";
+	    				$scope.buildChartBar();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -44,7 +46,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	    		.$promise.then(
 	    			function( value ) {
 	    				$scope.tableData = value;
-	    				$scope.buildChart();
+	    				$scope.color = "#C6151D";
+	    				$scope.buildChartBar();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -57,7 +60,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	    		.$promise.then(
 	    			function( value ) {
 	    				$scope.tableData = value;
-	    				$scope.buildChart();
+	    				$scope.color = "#C6151D";
+	    				$scope.buildChartBar();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -70,7 +74,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	    		.$promise.then(
 	    			function( value ) {
 	    				$scope.tableData = value;
-	    				$scope.buildChart();
+	    				$scope.color = "#C6151D";
+	    				$scope.buildChartBar();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -83,7 +88,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	    		.$promise.then(
 	    			function( value ) {
 	    				$scope.tableData = value;
-	    				$scope.buildChart();
+	    				$scope.color = "#C6151D";
+	    				$scope.buildChartBar();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -96,7 +102,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	    		.$promise.then(
 	    			function( value ) {
 	    				$scope.tableData = value;
-	    				$scope.buildChart();
+	    				$scope.color = "#C6151D";
+	    				$scope.buildChartBar();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -105,7 +112,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		break;
     }
     
-    $scope.buildChart = function() {
+    $scope.buildChartBar = function() {
     	
     	$scope.tweetIDs1 = [];
     	$scope.tweetIDs2 = [];
@@ -123,29 +130,132 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	$scope.highchartsNG = {
     	        options: {
     	            chart: {
-						backgroundColor: 'rgba(0, 0, 0, 0.5)',
+						backgroundColor: 'rgba(5, 5, 5, 0.7)',
     	                type: 'column',
-    	                marginTop: 50,
+    	                marginTop: 75,
 						color: "#f00"
-    	            }
+    	            },
+    	            legend: {
+        	            itemStyle: {
+        	            	color: "#FFF"
+        	            }
+        	        }
     	        },
     	        series: [{
     	        	name: "Tweets",
+    	        	color: $scope.color,
     	            data: [10, 15, 12, 8, 7, 1, 15, 10 , 8, 13]
     	        }],
     	        yAxis: {
+    	        	labels: {
+	    	        	style: {
+							color: '#FFF'
+						}
+    	        	},
     	            title: {
-    	                text: 'Sentiment'
+    	                text: 'Sentiment',
+    	                style: {
+							color: '#FFF'
+						}
     	            }
     	        },
     	        title: {
+    	        	y: 20,
 					style: {
-						color: '#F00',
-						font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+						color: '#FFF'
 					},
     	            text: 'Sentiment Analysis for ' + $scope.chartTitle
     	        },
     	        xAxis: {
+    	        	labels: {
+	    	        	style: {
+							color: '#FFF'
+						}
+    	        	},
+    	            categories: [
+    	                'Jan',
+    	                'Feb',
+    	                'Mar',
+    	                'Apr',
+    	                'May',
+    	                'Jun',
+    	                'Jul',
+    	                'Aug',
+    	                'Sep',
+    	                'Oct',
+    	                'Nov',
+    	                'Dec'
+    	            ],
+    	            crosshair: true
+    	        },
+    	        loading: false
+    	    }
+    	
+    	$scope.dataLoaded = true;
+    	$scope.hideChart = false;
+
+    }
+    
+    $scope.buildChartLine = function() {
+    	
+    	$scope.tweetIDs1 = [];
+    	$scope.tweetIDs2 = [];
+    	
+    	var tweetsLength = $scope.tableData.length
+    	
+    	for (var i = 0; i < tweetsLength; i++) {
+    		if ( i < (tweetsLength / 2) ) {
+    			$scope.tweetIDs1.push($scope.tableData[i].tid);
+    		} else {
+    			$scope.tweetIDs2.push($scope.tableData[i].tid);
+    		}
+    	}	
+    	
+    	$scope.highchartsNG = {
+    	        options: {
+    	            chart: {
+						backgroundColor: 'rgba(5, 5, 5, 0.7)',
+    	                type: 'line',
+    	                marginTop: 75,
+						color: "#f00"
+    	            },
+    	            legend: {
+        	            itemStyle: {
+        	            	color: "#FFF"
+        	            }
+        	        }
+    	        },
+    	        series: [{
+    	        	name: "Tweets",
+    	        	color: $scope.color,
+    	            data: [10, 15, 12, 8, 7, 1, 15, 10 , 8, 13]
+    	        }],
+    	        yAxis: {
+    	        	labels: {
+	    	        	style: {
+							color: '#FFF'
+						}
+    	        	},
+    	            title: {
+    	                text: 'Sentiment',
+    	                style: {
+							color: '#FFF'
+						}
+    	            }
+    	        },
+    	        title: {
+    	        	y: 20,
+					style: {
+						color: '#FFF'
+					},
+    	            text: 'Sentiment Analysis for ' + $scope.chartTitle
+    	        },
+    	        xAxis: {
+    	        	labels: {
+	    	        	style: {
+							color: '#FFF'
+						}
+    	        	},
     	            categories: [
     	                'Jan',
     	                'Feb',
@@ -171,22 +281,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     }
     
     $scope.toggleLine = function() {
-    	$scope.highchartsNG.options = {
-    	    chart: {
-    	        type: 'line',
-    	        marginTop: 50
-    	    }
-    	}
+    	$scope.buildChartLine();
     	$scope.$apply();
     }
     
     $scope.toggleBar = function() {
-    	$scope.highchartsNG.options = {
-    	    chart: {
-    	        type: 'column',
-    	        marginTop: 50
-    	    }
-    	}
+    	$scope.buildChartBar();
     	$scope.$apply();
     }
     
