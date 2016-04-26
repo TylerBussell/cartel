@@ -172,10 +172,11 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/lessPartyBroEdited.jpg') no-repeat;
+    background: url('../img/lessPartyBroEdited.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
+    z-index: 100;
 
 }
 
@@ -187,10 +188,11 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/Trump.jpg') no-repeat;
+    background: url('../img/Trump.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
+    z-index: 100;
 }
 
 .circular-hillary{
@@ -201,7 +203,7 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/crazyClinton.jpg') no-repeat;
+    background: url('../img/crazyClinton.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
@@ -215,7 +217,7 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/Cruz.jpg') no-repeat;
+    background: url('../img/Cruz.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
@@ -229,7 +231,7 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/Bernie.jpg') no-repeat;
+    background: url('../img/Bernie.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
