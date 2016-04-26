@@ -123,8 +123,10 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	$scope.highchartsNG = {
     	        options: {
     	            chart: {
+						backgroundColor: 'rgba(0, 0, 0, 0.5)',
     	                type: 'column',
-    	                marginTop: 50
+    	                marginTop: 50,
+						color: "#f00"
     	            }
     	        },
     	        series: [{
@@ -137,6 +139,10 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	            }
     	        },
     	        title: {
+					style: {
+						color: '#F00',
+						font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+					},
     	            text: 'Sentiment Analysis for ' + $scope.chartTitle
     	        },
     	        xAxis: {

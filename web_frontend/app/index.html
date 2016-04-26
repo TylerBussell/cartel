@@ -20,42 +20,45 @@
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body>
+<body style="background-image: url('img/background.jpg'); background-size:cover; background-repeat: no-repeat; background-size: 100%;">
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-  
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        
-        <!--<ul class="menu">
-          <li><a href="#/view1">view1</a></li>
-          <li><a href="#/view2">view2</a></li>
-       </ul>-->
-          <a id="home" class="navbar-brand" href="#" style="display:inline"><!--<img src="img/site_logo.jpg" style="width: 25px; height: 25px; display:inline; padding-right: 5px">-->TwittiCal</a>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <!--<ul class="menu">
+            <li><a href="#/view1">view1</a></li>
+            <li><a href="#/view2">view2</a></li>
+         </ul>-->
+            <a id="home" class="navbar-brand" href="#" style="display:inline"><!--<img src="img/site_logo.jpg" style="width: 25px; height: 25px; display:inline; padding-right: 5px">-->TwittiCal</a>
+        </div>
+
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#analysisView/trump">Trump</a></li>
+            <li><a href="#analysisView/clinton">Clinton</a></li>
+            <li><a href="#analysisView/sanders">Sanders</a></li>
+            <li><a href="#analysisView/cruz">Cruz</a></li>
+            <li><a href="#analysisView/democrat">Democrat</a></li>
+            <li><a href="#analysisView/republican">Republican</a></li>
+            <li><a href="#view2">How It Works</a></li>
+            <li><a href="#teampage">Team</a></li>
+          </ul>
+         </div>
+
       </div>
-       
-       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="#analysisView/trump">Trump</a></li>
-          <li><a href="#analysisView/clinton">Clinton</a></li>
-          <li><a href="#analysisView/sanders">Sanders</a></li>
-          <li><a href="#analysisView/cruz">Cruz</a></li>
-          <li><a href="#analysisView/democrat">Democrat</a></li>
-          <li><a href="#analysisView/republican">Republican</a></li>
-          <li><a href="#view2">How It Works</a></li>
-          <li><a href="#teampage">Team</a></li>
-        </ul>
-       </div>
+    </nav>
 
-  	</div>
-  </nav>
-
-  <div ng-view></div>
+    <div ng-view>
+      <!--<div class="wrapper">-->
+      <!--</div>-->
+      <!--<div class="push"></div>-->
+      <!--<div class="footer"> Twittical: v<span app-version></span></div>-->
+    </div>
   
-  <div class="map-footer"> Twittical: v<span app-version></span></div>
+
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>

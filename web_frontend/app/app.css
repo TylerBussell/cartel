@@ -31,8 +31,8 @@
 
 .navbar-default {
     background-color: #AD0000;
-    background-image: linear-gradient(120deg, #E60000, #AD0000, #003399);
-    border-color: #820000;
+    background-image: linear-gradient(90deg, #E60000, #003399);
+    border-color: #666666;
 }
 
 .navbar-default .navbar-brand {
@@ -61,6 +61,7 @@
 }
 
 .map-title {
+    color: white;
     font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
 	font-size: 35px;
 	font-style: normal;
@@ -139,4 +140,35 @@ psuedo element with clearfix and display: table; , all after (which is why I kno
 	font-variant: normal;
 	font-weight: 500;
 	line-height: 26.4px;
-}  
+}
+
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+.footer, .push {
+    height: 4em;
+}
+.no-border {
+    border-bottom: none;
+}
+
+.circular {
+    width: 300px;
+    height: 300px;
+    left: 100px;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    background: url('img/lessPartyBroEdited.jpg') no-repeat;
+    background-size: 100%;
+    margin: 0 auto;
+}
