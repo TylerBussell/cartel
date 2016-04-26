@@ -155,7 +155,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	        }
     	        },
     	        series: [{
-    	        	name: "Tweets",
+    	        	name: "Avg Sentiment",
     	        	color: $scope.color,
     	        	borderColor: $scope.color,
     	            data: [0.25, 0.3, 0.2, 0.4, 0.2, 0.25]
@@ -178,7 +178,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 					style: {
 						color: '#FFF'
 					},
-    	            text: 'Sentiment Analysis for ' + $scope.chartTitle
+    	            text: 'Public Twitter Opinion of ' + $scope.chartTitle + ' Over Time'
     	        },
     	        xAxis: {
     	        	labels: {
@@ -221,7 +221,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	        }
     	        },
     	        series: [{
-    	        	name: "Tweets",
+    	        	name: "Avg Sentiment",
     	        	color: $scope.color,
     	        	data: [0.25, 0.3, 0.2, 0.4, 0.2, 0.25]
     	        }],
@@ -243,7 +243,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 					style: {
 						color: '#FFF'
 					},
-    	            text: 'Sentiment Analysis for ' + $scope.chartTitle
+    	            text: 'Public Twitter Opinion of ' + $scope.chartTitle + ' Over Time'
     	        },
     	        xAxis: {
     	        	labels: {
@@ -317,7 +317,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	        }
     	        },
     	        series: [{
-    	        	name: "Tweets",
+    	        	name: "Avg Sentiment",
     	        	color: $scope.color,
     	        	data: [0.25, 0.27, 0.25, 0.3, 0.35, 0.25]
     	        }],
@@ -339,7 +339,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 					style: {
 						color: '#FFF'
 					},
-    	            text: 'Sentiment Analysis for ' + $scope.chartTitle
+    	            text: 'Public Twitter Opinion of ' + $scope.chartTitle + ' Over Time'
     	        },
     	        xAxis: {
     	        	labels: {
