@@ -1,15 +1,15 @@
 <div class="page-header no-border" ng-controller="AnalysisViewCtrl">
 	<div style="margin: 0 auto; text-align: center">	
-		<div class="input-group margin-bottom-sm" style="width:300px; margin: 0 auto;">
+		<div class="input-group margin-bottom-sm" style="width:300px; margin: 0 auto;  color:white; opacity: 1">
 	  		 
 	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-	  		 <input id="datepickerStart" class="form-control" type="text" placeholder="Enter A Start Date" style="width:150px;">
+	  		 <input id="datepickerStart" class="form-control" type="text" placeholder="Enter A Start Date" style="width:150px;opacity: 0.5; padding-left: 10px; margin-right: 10px;">
 	  		 
-	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-	  		 <input id="datepickerEnd" class="form-control" type="text" placeholder="Enter An End Date" style="width:150px;">
+	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw" style=""></i></span>
+	  		 <input id="datepickerEnd" class="form-control" type="text" placeholder="Enter An End Date" style="width:150px;opacity: 0.5; padding-left: 10px;">
 	  		 
-	  		 <span class="input-group-btn">
-			 	 <button class="btn btn-secondary" type="button">Change Dates</button>
+	  		 <span class="input-group-btn" style="padding-left: 10px;">
+			 	 <button class="btn btn-secondary red" type="button">Change Dates</button>
 			 </span>
 		</div>
 	</div>
@@ -19,13 +19,13 @@
     	<i class="fa fa-spinner fa-pulse fa-3x" style="margin-top: 50px; margin-bottom: 50px; color: white;"></i>
 	</p>
 	<div id="statisticDiv" ng-hide="hideChart">
-		<highchart id="chart1" config="highchartsNG" style="width: 95%; margin-left: 2%"></highchart>
+		<highchart id="chart1" config="highchartsNG" style="width: 95%; margin-left: 2%" class="card transparent"></highchart>
 		<br>
 		<br>
 		<div style="margin: 0 auto; text-align: center">	
-			<a class="btn btn-default btn-sm" ng-click="toggleLine()">
+			<a class="btn btn-default btn-sm red" ng-click="toggleLine()">
   				<i class="fa fa-line-chart" aria-hidden="true"></i> Basic Line</a>
-  			<a class="btn btn-default btn-sm" ng-click="toggleBar()">
+  			<a class="btn btn-default btn-sm red" ng-click="toggleBar()">
   				<i class="fa fa-bar-chart" aria-hidden="true"></i> Bar Chart</a>
 		</div>
 		<br>

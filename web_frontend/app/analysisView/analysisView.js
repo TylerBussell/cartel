@@ -165,7 +165,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 					style: {
 						color: '#FFF'
 					},
-    	            text: 'Sentiment Analysis for ' + $scope.chartTitle
+    	            text: 'Changes in the opinion of ' + $scope.chartTitle +' over time'
     	        },
     	        xAxis: {
     	        	labels: {

@@ -1,5 +1,7 @@
 /* app css stylesheet */
-
+body{
+    font-family: Century Gothic
+}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -229,4 +231,7 @@ html, body {
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
+}
+.form-control{
+    color: #fff!important;
 }
