@@ -187,12 +187,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						}
     	        	},
     	            categories: [
-    	                'March 1',
-    	                'March 11',
-    	                'March 21',
-    	                'March 31',
-    	                'April 11',
-    	                'April 21'
+						'April 1',
+						'April 6',
+						'April 11',
+						'April 16',
+						'April 21',
+						'April 25'
     	            ],
     	            crosshair: true
     	        },
@@ -252,12 +252,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						}
     	        	},
     	            categories: [
-						'March 1',
-						'March 11',
-						'March 21',
-						'March 31',
-						'April 11',
-						'April 21'
+     	                'April 1',
+    	                'April 6',
+    	                'April 11',
+    	                'April 16',
+    	                'April 21',
+    	                'April 25'
     	            ],
     	            crosshair: true
     	        },
@@ -348,12 +348,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						}
     	        	},
     	            categories: [
-						'March 1',
-						'March 6',
-						'March 11',
-						'March 16',
-						'March 21',
-						'March 26'
+	 	                'April 15',
+		                'April 17',
+		                'April 19',
+		                'April 21',
+		                'April 23',
+		                'April 25'
     	            ],
     	            crosshair: true
     	        },
