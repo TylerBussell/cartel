@@ -14,21 +14,19 @@
 		</div>
 	</div>
 	<br>
-	<br>
 	<p class="text-center" ng-hide="dataLoaded">
-    	<i class="fa fa-spinner fa-pulse fa-3x" style="margin-top: 50px; margin-bottom: 50px; color: white;"></i>
+    	<i class="fa fa-spinner fa-pulse fa-3x" style="margin-top: 50px; margin-bottom: 30px; color: white;"></i>
 	</p>
-	<div id="statisticDiv" ng-hide="hideChart">
-		<highchart id="chart1" config="highchartsNG" style="width: 95%; margin-left: 2%" class="card transparent"></highchart>
-		<br>
-		<br>
-		<div style="margin: 0 auto; text-align: center">	
-			<a class="btn btn-default btn-sm red" ng-click="toggleLine()">
+	<div id="statisticDiv" ng-hide="hideChart" class="transparent">
+		<highchart id="chart1" config="highchartsNG" style="width: 95%; margin-left: 2%"></highchart>
+		<div style="margin: auto 0; padding-bottom: 1%; width:95%; margin-left: 2%; margin-right: 2%; text-align: center; background-color: rgba(5, 5, 5, 0.7)" class="">	
+			<a class="btn btn-default btn-sm transparent" ng-click="toggleLine()">
   				<i class="fa fa-line-chart" aria-hidden="true"></i> Basic Line</a>
-  			<a class="btn btn-default btn-sm red" ng-click="toggleBar()">
+  			<a class="btn btn-default btn-sm transparent" ng-click="toggleBar()">
   				<i class="fa fa-bar-chart" aria-hidden="true"></i> Bar Chart</a>
 		</div>
 		<br>
+	</div>
 		<!--<div style="padding: 0% 1% 0% 1%">
 		  <table ng-table="tableParams" class="table table-bordered ng-table-responsive">
 		      <tr ng-repeat="post in $data">
@@ -44,6 +42,7 @@
 		      </tr>
 		  </table>
 		</div>-->
+	<div>
 		<div style="text-align: center; margin: 0 auto; width: 100%;">
 			<br>
 			<h3>Latest Tweets For {{chartTitle}}</h3>

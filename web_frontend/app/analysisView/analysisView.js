@@ -133,7 +133,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						backgroundColor: 'rgba(5, 5, 5, 0.7)',
     	                type: 'column',
     	                marginTop: 75,
-						color: "#f00"
+						color: "#ff5656"
     	            },
     	            legend: {
         	            itemStyle: {
@@ -165,7 +165,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 					style: {
 						color: '#FFF'
 					},
-    	            text: 'Changes in the opinion of ' + $scope.chartTitle +' over time'
+    	            text: 'Changes in the public opinion of ' + $scope.chartTitle + ' over time'
     	        },
     	        xAxis: {
     	        	labels: {
@@ -218,7 +218,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						backgroundColor: 'rgba(5, 5, 5, 0.7)',
     	                type: 'line',
     	                marginTop: 75,
-						color: "#f00"
+						color: "#ff5656"
     	            },
     	            legend: {
         	            itemStyle: {
@@ -249,7 +249,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 					style: {
 						color: '#FFF'
 					},
-    	            text: 'Sentiment Analysis for ' + $scope.chartTitle
+    	            text: 'Changes in the public opinion of ' + $scope.chartTitle + ' over time'
     	        },
     	        xAxis: {
     	        	labels: {
