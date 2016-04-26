@@ -14,8 +14,8 @@ class Candidate(Model):
 
     candidate = columns.Text(required=True, primary_key=True)
     created_at = columns.DateTime(required=True, primary_key=True)
+    sentiment = columns.Float(required=True, primary_key=True)
     tid = columns.BigInt(required=True, primary_key=True)
-    sentiment = columns.Float(required=False)
     text = columns.Text(required=True)
     user = columns.Text(required=False)
     anger = columns.Float(required=False)
