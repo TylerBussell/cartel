@@ -59,6 +59,7 @@ body{
 .navbar-default .navbar-nav > .active > a:focus {
     color: #FFF;
     background-color: #820000;
+    height:51px!important;
 }
 
 .map-title {
@@ -148,6 +149,7 @@ psuedo element with clearfix and display: table; , all after (which is why I kno
 }
 html, body {
     height: 100%;
+    top:-2px;
 }
 .wrapper {
     min-height: 100%;
