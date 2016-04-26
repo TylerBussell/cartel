@@ -144,6 +144,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	        series: [{
     	        	name: "Tweets",
     	        	color: $scope.color,
+    	        	borderColor: $scope.color,
     	            data: [10, 15, 12, 8, 7, 1, 15, 10 , 8, 13]
     	        }],
     	        yAxis: {
