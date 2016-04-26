@@ -72,10 +72,50 @@ def democrat_list(request):
 def republican_list(request):
     return candidate_list(request, 'Republican')
 
-@api_view(['GET'])
-@permission_classes((AllowAny,))
-def aggregate_list(request) :
+def aggregate_list(request, candidate) :
     if request.method == 'GET':
-        aggregate = Aggregate.objects.all()
+        aggregate = None
+        if candidate is not None:
+            aggregate = Aggregate.objects.filter(candidate = candidate)
+        else:
+            aggregate = Aggregate.objects.all()
         serializer = AggregateSerializer(aggregate, many=True)                                                                                                                                      
         return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_bernie(request):
+    return aggregate_list(request, 'bernie')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_cruz(request):
+    return aggregate_list(request, 'cruz')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_hillary(request):
+    return aggregate_list(request, 'hillary')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_trump(request):
+    return aggregate_list(request, 'trump')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_democrat(request):
+    return aggregate_list(request, 'democrat')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_republican(request):
+    return aggregate_list(request, 'republican')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_all(request):
+    return aggregate_list(request, None)
+
+
+
