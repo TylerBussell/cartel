@@ -123,15 +123,44 @@ def words_list(request, candidate) :
     if request.method == 'GET':
         words = None
         if candidate is not None:
+            print('shit')
             words = Word.objects.filter(candidate = candidate)
         else:
             words = Word.objects.all()
-        serializer = WordSerializer(Word.objects.all(), many=True)
+        serializer = WordSerializer(words, many=True)
         return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def words_bernie(request):
+    return words_list(request, 'bernie')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def words_cruz(request):
+    return words_list(request, 'cruz')
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def words_hillary(request):
     return words_list(request, 'hillary')
 
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def words_trump(request):
+    return words_list(request, 'trump')
 
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def words_democrat(request):
+    return words_list(request, 'democrat')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def words_republican(request):
+    return words_list(request, 'republican')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def words_all(request):
+    return words_list(request, None)
