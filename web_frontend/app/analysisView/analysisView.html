@@ -19,13 +19,13 @@
 	</p>
 	<div id="statisticDiv" ng-hide="chartDataLoaded" class="transparent" style="text-align: center">
 		<highchart id="chart1" config="highchartsNG" style="width: 95%; margin-left: 2%"></highchart>
-		<div style="margin: auto 0; padding-bottom: 1%; width:95%; margin-left: 2%; margin-right: 2%; text-align: center; background-color: rgba(5, 5, 5, 0.7)" class="">	
+		<div style="margin: auto 0; padding-bottom: 1%; width:95%; margin-left: 2%; margin-right: 2%; text-align: center; background-color: rgba(34, 34, 34, 1)" class="">	
 			<a class="btn btn-default btn-sm transparent" ng-click="buildChartLine()">
-  				<i class="fa fa-line-chart" aria-hidden="true"></i> Basic Line</a>
+  				<i class="fa fa-line-chart" aria-hidden="true"></i> Avg. Sentiment</a>
   			<a class="btn btn-default btn-sm transparent" ng-click="buildChartBar()">
-  				<i class="fa fa-bar-chart" aria-hidden="true"></i> Bar Chart</a>
+  				<i class="fa fa-bar-chart" aria-hidden="true"></i> +/- Stacked</a>
   			<a class="btn btn-default btn-sm transparent" ng-click="buildChartScatter()">
-  				<i class="fa fa-bar-chart" aria-hidden="true"></i> Tweet Scatter</a>
+  				<i class="fa fa-twitter-square" aria-hidden="true"></i> Recent Tweets</a>
 		</div>
 		<br>
 	</div>

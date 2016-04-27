@@ -1,0 +1,30 @@
+<div class="page-header no-border" ng-controller="CumulativeViewCtrl">
+	<div style="margin: 0 auto; text-align: center">	
+		<div class="input-group margin-bottom-sm" style="width:300px; margin: 0 auto;  color:white; opacity: 1">
+	  		 
+	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+	  		 <input id="datepickerStart" class="form-control" type="text" placeholder="Enter A Start Date" style="width:150px;opacity: 0.5; padding-left: 10px; margin-right: 10px;">
+	  		 
+	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw" style=""></i></span>
+	  		 <input id="datepickerEnd" class="form-control" type="text" placeholder="Enter An End Date" style="width:150px;opacity: 0.5; padding-left: 10px;">
+	  		 
+	  		 <span class="input-group-btn" style="padding-left: 10px;">
+			 	 <button class="btn btn-secondary red" type="button" ng-click="changeDates()">Change Dates</button>
+			 </span>
+		</div>
+	</div>
+	<br>
+	<p class="text-center" ng-hide="dataLoaded">
+    	<i class="fa fa-spinner fa-pulse fa-3x" style="margin-top: 50px; margin-bottom: 30px; color: white;"></i>
+	</p>
+	<div id="statisticDiv" ng-hide="chartDataLoaded" class="transparent" style="text-align: center">
+		<highchart id="chart1" config="highchartsNG" style="width: 95%; margin-left: 2%"></highchart>
+		<div style="margin: auto 0; padding-bottom: 1%; width:95%; margin-left: 2%; margin-right: 2%; text-align: center; background-color: rgba(34, 34, 34, 1)" class="">	
+			<a class="btn btn-default btn-sm transparent" ng-click="buildCumulativeNegativeChart()">
+  				<i class="fa fa-line-chart" aria-hidden="true"></i> Avg - Sentiment</a>
+  			<a class="btn btn-default btn-sm transparent" ng-click="buildCumulativePositiveChart()">
+  				<i class="fa fa-bar-chart" aria-hidden="true"></i> Avg + Sentiment</a>
+		</div>
+		<br>
+	</div>
+</div>

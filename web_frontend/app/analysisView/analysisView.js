@@ -9,8 +9,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
   });
 }])
 
-.controller('AnalysisViewCtrl', ['$scope', 'NgTableParams', 'cartelAPITrump', 'cartelAPIHillary', 'cartelAPIBernie', 'cartelAPICruz', 'cartelAPIDemocrat', 'cartelAPIRepublican', 'cartelAPITrumpAggregate', 'cartelAPIHillaryAggregate', 'cartelAPIBernieAggregate', 'cartelAPICruzAggregate', '$http', '$routeParams',
-                                 function($scope, NgTableParams, cartelAPITrump, cartelAPIHillary, cartelAPIBernie, cartelAPICruz, cartelAPIDemocrat, cartelAPIRepublican, cartelAPITrumpAggregate, cartelAPIHillaryAggregate, cartelAPIBernieAggregate, cartelAPICruzAggregate, $http, $routeParams) {
+.controller('AnalysisViewCtrl', ['$scope', 'NgTableParams', 'cartelAPITrump', 'cartelAPIHillary', 'cartelAPIBernie', 'cartelAPICruz', 'cartelAPIDemocrat', 'cartelAPIRepublican', 'cartelAPITrumpAggregate', 'cartelAPIHillaryAggregate', 'cartelAPIBernieAggregate', 'cartelAPICruzAggregate', 'cartelAPIAll', '$http', '$routeParams',
+                                 function($scope, NgTableParams, cartelAPITrump, cartelAPIHillary, cartelAPIBernie, cartelAPICruz, cartelAPIDemocrat, cartelAPIRepublican, cartelAPITrumpAggregate, cartelAPIHillaryAggregate, cartelAPIBernieAggregate, cartelAPICruzAggregate, cartelAPIAll, $http, $routeParams) {
 
 	$scope.chartDataLoaded = true;
 	$scope.tweetDataLoaded = true;
@@ -158,6 +158,42 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		break;
     }
     
+    $scope.createCumulativeDataArray = function() {
+    	$scope.trumpNegativeCumulative = [];
+    	$scope.clintonNegativeCumulative = [];
+    	$scope.sandersNegativeCumulative = [];
+    	$scope.cruzNegativeCumulative = [];
+    	$scope.trumpPositiveCumulative = [];
+    	$scope.clintonPositiveCumulative = [];
+    	$scope.sandersPositiveCumulative = [];
+    	$scope.cruzPositiveCumulative = [];
+    	
+    	for (var i = 0; i < $scope.chartData.length; i++) {
+    		var baseDate = Date.UTC(2016, 3, 16);
+    		baseDate = baseDate + ($scope.chartData[i].datetime_block*60*60*1000);
+    		var candidateName = $scope.chartData[i].candidate
+    		switch (candidateName) {
+    			case "trump":
+    				$scope.trumpPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
+    	    		$scope.trumpNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+    	    		break;
+    			case "bernie":
+    				$scope.sandersPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
+    	    		$scope.sandersNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+    	    		break;
+    			case "hillary":
+    				$scope.clintonPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
+    	    		$scope.clintonNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+    	    		break;
+    			case "cruz":
+    				$scope.cruzPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
+    	    		$scope.cruzNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+    	    		break;
+    		}
+    	}
+    	
+    } 
+    
     $scope.createDataSets = function() {
     	$scope.positiveSentimentArray = [];
     	$scope.negativeSentimentArray = [];
@@ -180,7 +216,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 		
 		var tweetsLength = $scope.tweetData.length
 		
-		$scope.tweetScatterData = [];
+		$scope.tweetScatterDatax = [];
+        $scope.tweetScatterDatay = [];
+        $scope.tweetScatterDatatext = [];
+        $scope.tweetScatterDatauser = [];
+
+
 		
 		for (var i = 0; i < tweetsLength; i++) {
 			if ( i < (tweetsLength / 2) ) {
@@ -188,9 +229,11 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 			} else {
 				$scope.tweetIDs2.push($scope.tweetData[i].tid);
 			}
-			$scope.tweetScatterData.push([$scope.tweetData[i].sentiment.toFixed(2)/1, $scope.tweetData[i].text.length])
+			$scope.tweetScatterDatax.push($scope.tweetData[i].sentiment.toFixed(2)/1)
+            $scope.tweetScatterDatay.push(i);
+            $scope.tweetScatterDatatext.push($scope.tweetData[i].text);
+            $scope.tweetScatterDatauser.push($scope.tweetData[i].user);
 		}	
-		
 		$scope.tweetDataLoaded = false;
 		$scope.dataLoaded = true;
     }
@@ -198,6 +241,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     $scope.buildChartBar = function() {
     	
     	$scope.createDataSets();
+    	
+    	Highcharts.setOptions({
+    	    lang: {
+    	    	thousandsSep: ','
+    	    }
+    	});
     	
     	$scope.highchartsNG = {
     	        options: {
@@ -216,6 +265,9 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	        	column: {
         	        		stacking: 'normal'
         	        	}
+        	        },
+        	        tooltip: {
+        	            shared:true
         	        }
     	        },
     	        xAxis: {
@@ -290,18 +342,21 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	                            enabled: false
 	                        }
         	        	}
+        	        },
+        	        tooltip: {
+        	            shared:true
         	        }
     	        },
     	        series: [{
-    	        	name: "Average Negative Sentiment",
-    	        	color: $scope.color,
-    	        	borderColor: $scope.color,
-    	            data: $scope.negativeSentimentArray
-    	        },{
     	        	name: "Average Positive Sentiment",
     	        	color: '#003f74',
     	        	borderColor: '#003f74',
     	            data: $scope.positiveSentimentArray
+    	        },{
+    	        	name: "Average Negative Sentiment",
+    	        	color: $scope.color,
+    	        	borderColor: $scope.color,
+    	            data: $scope.negativeSentimentArray
     	        }],
     	        yAxis: {
     	        	labels: {
@@ -344,7 +399,10 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     $scope.buildChartScatter = function() {
     	
     	$scope.createDataSets();
-    	
+        var datata = []
+    	for (var i = 0 ; i < $scope.tweetScatterDatax.length; i++){
+            datata.push({x: $scope.tweetScatterDatax[i], y:$scope.tweetScatterDatay[i], text:$scope.tweetScatterDatatext[i], user:$scope.tweetScatterDatauser[i]});
+        }
     	$scope.highchartsNG = {
     	        options: {
     	            chart: {
@@ -357,27 +415,29 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	            itemStyle: {
         	            	color: "#FFF"
         	            }
-        	        }
+        	        },
+                    tooltip: {
+                        formatter: function () {
+                        var s = '<b>@'+this.point.user+'</b>: ' + this.point.text;
+
+                        return s;
+                    },
+                    shared: true,
+                    enabled: true
+
+                    }
     	        },
     	        series: [{
-    	        	name: "Latest Tweets",
+    	        	name: "Tweet",
     	        	color: $scope.color,
     	        	borderColor: $scope.color,
-    	            data: $scope.tweetScatterData
+    	            data: datata
     	        }],
     	        yAxis: {
-    	        	labels: {
-	    	        	style: {
-							color: '#FFF'
-						}
-    	        	},
-    	            title: {
-    	                text: 'Length',
-    	                style: {
-							color: '#FFF'
-						}
-    	            },
-    	            gridLineColor: 'transparent'
+    	            gridLineColor: 'transparent',
+                    visible: false,
+                    min:-1,
+                    max:51
     	        },
     	        title: {
     	        	y: 20,
@@ -398,8 +458,11 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 							color: '#FFF'
 						}
     	        	},
-    	            crosshair: true
+    	            crosshair: true,
+                    min:-0.05,
+                    max:1.05
     	        },
+
     	        loading: false
     	    }
     	
@@ -416,7 +479,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	var tweetsLength = $scope.tweetData.length
     	
     	for (var i = 0; i < tweetsLength; i++) {
-    		if ( i < (tweetsLength / 2) ) {
+    		if ( i < tweetsLength ) {
     			$scope.tweetIDs1.push($scope.tweetData[i].tid);
     		} else {
     			$scope.tweetIDs2.push($scope.tweetData[i].tid);
@@ -487,7 +550,15 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     }
     
     $(function() {
-        $( "#datepickerStart" ).datepicker( { dateFormat: 'dd-mm-yy' } );
-        $( "#datepickerEnd" ).datepicker( { dateFormat: 'dd-mm-yy' } );
+    	$( "#datepickerStart" ).datetimepicker({
+    		showMinute: false,
+    		minDate: new Date(2016, 3, 16, 0, 0),
+    		maxDate: new Date()
+    	});
+    	$( "#datepickerEnd" ).datetimepicker({
+    		showMinute: false,
+    		minDate: new Date(2016, 3, 16, 0, 0),
+    		maxDate: new Date()
+    	});
     });
 }]);

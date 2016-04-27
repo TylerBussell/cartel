@@ -95,3 +95,11 @@ twitterServices.factory('cartelAPIRepublicanAggregate', ['$resource',
 		});
 	}
 ]);
+
+twitterServices.factory('cartelAPIAll', ['$resource',
+    function($resource){
+	    return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/aggregate/all', {}, {
+	        queryAll: {method:'GET', isArray:true}
+ 		});
+ 	}
+]);
