@@ -6,7 +6,7 @@ epoch = datetime.utcfromtimestamp(0)
 
 def getRows(candidate, start_time, end_time):
     
-    return session.execute('ELECT * FROM %s WHERE candidate=\'%s\' AND (created_at, sentiment, tid) >= (%s, 0, 0) AND created_at < %s ;' %\
+    return session.execute('SELECT * FROM %s WHERE candidate=\'%s\' AND (created_at, sentiment, tid) >= (%s, 0, 0) AND created_at < %s ;' %\
      (candidate, candidate, str(int((start_time - epoch).total_seconds() * 1000.0)),\
     str(int((end_time - epoch).total_seconds() * 1000.0))))
 
