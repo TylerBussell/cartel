@@ -9,8 +9,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
   });
 }])
 
-.controller('AnalysisViewCtrl', ['$scope', 'NgTableParams', 'cartelAPITrump', 'cartelAPIHillary', 'cartelAPIBernie', 'cartelAPICruz', 'cartelAPIDemocrat', 'cartelAPIRepublican', 'cartelAPITrumpAggregate', 'cartelAPIHillaryAggregate', 'cartelAPIBernieAggregate', 'cartelAPICruzAggregate', '$http', '$routeParams',
-                                 function($scope, NgTableParams, cartelAPITrump, cartelAPIHillary, cartelAPIBernie, cartelAPICruz, cartelAPIDemocrat, cartelAPIRepublican, cartelAPITrumpAggregate, cartelAPIHillaryAggregate, cartelAPIBernieAggregate, cartelAPICruzAggregate, $http, $routeParams) {
+.controller('AnalysisViewCtrl', ['$scope', 'NgTableParams', 'cartelAPITrump', 'cartelAPIHillary', 'cartelAPIBernie', 'cartelAPICruz', 'cartelAPIDemocrat', 'cartelAPIRepublican', 'cartelAPITrumpAggregate', 'cartelAPIHillaryAggregate', 'cartelAPIBernieAggregate', 'cartelAPICruzAggregate', 'cartelAPIAll', '$http', '$routeParams',
+                                 function($scope, NgTableParams, cartelAPITrump, cartelAPIHillary, cartelAPIBernie, cartelAPICruz, cartelAPIDemocrat, cartelAPIRepublican, cartelAPITrumpAggregate, cartelAPIHillaryAggregate, cartelAPIBernieAggregate, cartelAPICruzAggregate, cartelAPIAll, $http, $routeParams) {
 
 	$scope.chartDataLoaded = true;
 	$scope.tweetDataLoaded = true;
@@ -157,6 +157,42 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	    	);
     		break;
     }
+    
+    $scope.createCumulativeDataArray = function() {
+    	$scope.trumpNegativeCumulative = [];
+    	$scope.clintonNegativeCumulative = [];
+    	$scope.sandersNegativeCumulative = [];
+    	$scope.cruzNegativeCumulative = [];
+    	$scope.trumpPositiveCumulative = [];
+    	$scope.clintonPositiveCumulative = [];
+    	$scope.sandersPositiveCumulative = [];
+    	$scope.cruzPositiveCumulative = [];
+    	
+    	for (var i = 0; i < $scope.chartData.length; i++) {
+    		var baseDate = Date.UTC(2016, 3, 16);
+    		baseDate = baseDate + ($scope.chartData[i].datetime_block*60*60*1000);
+    		var candidateName = $scope.chartData[i].candidate
+    		switch (candidateName) {
+    			case "trump":
+    				$scope.trumpPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
+    	    		$scope.trumpNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+    	    		break;
+    			case "bernie":
+    				$scope.sandersPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
+    	    		$scope.sandersNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+    	    		break;
+    			case "hillary":
+    				$scope.clintonPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
+    	    		$scope.clintonNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+    	    		break;
+    			case "cruz":
+    				$scope.cruzPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
+    	    		$scope.cruzNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+    	    		break;
+    		}
+    	}
+    	
+    } 
     
     $scope.createDataSets = function() {
     	$scope.positiveSentimentArray = [];

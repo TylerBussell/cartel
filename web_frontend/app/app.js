@@ -5,6 +5,7 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.homepage',
   'myApp.analysisView',
+  'myApp.cumulativeView',
   'myApp.version',
   'myApp.cartelServices',
   'myApp.teampage'
