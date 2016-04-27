@@ -1,5 +1,6 @@
 __author__ = 'tyler'
 from interface import predictTweet
+import re
 import json
 import sys
 import pyspark_cassandra
@@ -12,9 +13,11 @@ def db_dict(d, sent):
     d.update({'sentiment':sent,'user':d['uid']})
     return d
 
+def update_cand(d, cand):
+    d.update({'candidate':cand})
+    return d
 
 def clean_str(str):
-    import re
     str=str+" "
     str=re.sub("http[^ ]*[\\\]","\\\\",str)                    #Remove hyperlinks
     str=re.sub("http[^ ]* "," ",str)                           #Remove hyperlinks
@@ -50,15 +53,26 @@ zodiac_killer = db_dict.filter(lambda x: x['candidate'] == 'cruz')
 parties = db_dict.filter(lambda x: x['candidate'] == 'parties')
 
 if not trump.isEmpty():
-    ssc.saveToCassandra('db', 'trump')
+    trump.saveToCassandra('db', 'trump')
 if not hillary.isEmpty():
-    ssc.saveToCassandra('db', 'hillary')
+    hillary.saveToCassandra('db', 'hillary')
 if not bernie.isEmpty():
-    ssc.saveToCassandra('db', 'bernie')
+    bernie.saveToCassandra('db', 'bernie')
 if not zodiac_killer.isEmpty():
-    ssc.saveToCassandra('db', 'cruz')
+    zodiac_killer.saveToCassandra('db', 'cruz')
 if not parties.isEmpty():
+    dem_ptn = re.compile("democrat'?s?")
+    rep_ptn = re.compile("republican'?s?")
+    dem = parties.filter(lambda x: dem_ptn.match(x['text']))
+    gop = parties.filter(lambda x: rep_ptn.match(x['text']))
+    if not dem.isEmpty():
+        dem_db = dem.map(lambda x: update_cand(x, 'democrat'))
+        dem_db.saveToCassandra('db', 'democrat')
+    if not gop.isEmpty():
+        gop_db = dem.map(lambda x: update_cand(x, 'republican'))
+        gop_db.saveToCassandra('db', 'republican')
+
     ssc.saveToCassandra('db', 'parties')
-    
+
 ssc.start()
 ssc.awaitTermination()
