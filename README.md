@@ -23,12 +23,21 @@ One takeaway that should be noted is that your sentiment analysis is only as goo
 
 ## Spark + GNIP
 
+## Kafka
+
 ## Cassandra
 
 ## Django
 
+Backend and connector to Cassandra. Made heavy use of Django's ORM to serve up data to the front-end.
+
 ## LSTM language model with CNN
+CNN (Convolutional Neural Network) based text classifier, based off [this](http://arxiv.org/abs/1408.5882) and [this](https://github.com/flipkart-incubator/optimus), trained on 100k+ tweets with consistent accuracy of 84% across 3 unique test sets. We ran this on a Compute-Optimized instance on AWS leveraging Theano to make the computational burden significantly less. After the model was complete, we created an interface so we can easily send sentiment data to our Spark processing jobs. You can learn more about the model used [here](https://github.com/CUBigDataClass/cartel/blob/master/analysis/sentiment_analysis/README.md).
 
 ## AWS
 
+God bless AWS. Spun up servers for spark, cassandra, computation, Kafka, and several other technologies we needed.
+
 ## AngularJS
+
+Front-end for our project. We used REST API calls to Django to populate our charts.
