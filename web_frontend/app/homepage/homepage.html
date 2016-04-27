@@ -1,27 +1,24 @@
-<div class="page-header" style="text-align: center;" ng-controller="HomepageCtrl">	
-	<div style="width: 500px; margin: 0 auto">
-		<img src="img/site_logo.jpg" style="width: 400px; height: 200px;">
+<div class="page-header no-border" style="text-align: center;" ng-controller="HomepageCtrl">
+	<!--<div style="width: 500px; margin: 0 auto">-->
+		<!--<img src="img/site_logo.jpg" style="width: 400px; height: 200px;">-->
+	<!--</div>-->
+	<br>
+	<div class="clouds">			
+		<div class="cloud x2"></div>
+		<div class="cloud x3"></div>
+		<div class="cloud x4"></div>	
+		<div class="cloud x11"></div>
+		<div class="cloud x13"></div>
 	</div>
+	<h1 class="map-title" style="margin-top:-70px;"><img src="img/frontpage.png" alt="Twittical" width="300"></h1>
 	<br>
-	<h1 class="map-title">Welcome to TwittiCal!</h1>
+	<h3 style ="color: white; font-size: 20px; margin-top: -65px;">Tracking the online sentiment associated with every presidential candidate over time!</h3>
 	<br>
-	<h3>Our Project tracks the sentiment of tweets associated with the political candidates</h3>
-	<br>
-	<div style="margin: 0 auto; text-align: center">	
-		<div class="input-group margin-bottom-sm" style="width:700px; margin: 0 auto;">
-	 		 <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-	  		 <input id="queryInput" class="form-control" type="text" placeholder="Enter A Term To Query" style="width:300px;">
-	  		 
-	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-	  		 <input id="datepickerStart" class="form-control" type="text" placeholder="Enter A Start Date" style="width:150px;">
-	  		 
-	  		 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-	  		 <input id="datepickerEnd" class="form-control" type="text" placeholder="Enter An End Date" style="width:150px;">
-		</div>
-		<br>
-		<a class="btn btn-default btn-sm" ng-click="runQuery()">
-  			<i class="fa fa-bar-chart" aria-hidden="true"></i> Submit Query</a>
-		<!-- <button style="display: inline-block; margin-left: 5px" ng-click="runQuery()">Submit Query</button> -->
-	</div>
-	<br>
+
+	<a href="#analysisView/bernie"><div class="circular-bernie"></div></a>
+	<a href="#analysisView/clinton"><div class="circular-hillary"></div></a>
+	<div class="circular-obama"></div>
+	<a href="#analysisView/trump"><div class="circular-trump"></div></a>
+	<a href="#analysisView/cruz"><div class="circular-cruz"></div></a>
+	
 </div>

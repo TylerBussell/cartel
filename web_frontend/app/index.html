@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" href="img/donald-trump.jpeg"/>
-  <title>TwittiCal</title>
+  <title>Twittical</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
@@ -15,41 +15,61 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="components/ng-table/dist/ng-table.min.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <!--<link rel="stylesheet" href="components/angular-bootstrap/ui-bootstrap-csp.css">-->
   <link rel="stylesheet" href="components/font-awesome-4.6.1/css/font-awesome.min.css">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/clouds.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+          
+  <style>
+  a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: white;
+  }
+  nav{
+    height:51px; !important;
+    z-index: 100;
+    background-color: #343434;
+  }
+  nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 51px;
+     line-height: 51px; 
+}
+  </style>
 </head>
-<body>
+<body style="background-image: url('img/background.jpg'); background-size:cover; background-repeat: no-repeat; background-size: 100%;">
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-  
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        
-        <!--<ul class="menu">
-          <li><a href="#/view1">view1</a></li>
-          <li><a href="#/view2">view2</a></li>
-       </ul>-->
-          <a id="home" class="navbar-brand" href="#" style="display:inline"><!--<img src="img/site_logo.jpg" style="width: 25px; height: 25px; display:inline; padding-right: 5px">-->TwittiCal</a>
-      </div>
-       
-       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="#analysisView">Query</a></li>
-          <li><a href="#view2">How It Works</a></li>
-          <li><a href="#teampage">Team</a></li>
-        </ul>
-       </div>
 
-  	</div>
+<nav>
+    <div class="nav-wrapper" style="background-color: #343434;">
+      <a id="home" class="navbar-brand" href="#"><img src="img/logoalt.png" alt="Twittical" style="width:170px; height:auto; margin-top: -7.5px;"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" style="height:51px!important;">
+            <li><a href="#analysisView/trump">Trump</a></li>
+            <li><a href="#analysisView/clinton">Clinton</a></li>
+            <li><a href="#analysisView/sanders">Sanders</a></li>
+            <li><a href="#analysisView/cruz">Cruz</a></li>
+            <li><a href="#view2">How It Works</a></li>
+            <li><a href="#teampage">Team</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <div ng-view></div>
+    <div ng-view>
+      <!--<div class="wrapper">-->
+      <!--</div>-->
+      <!--<div class="push"></div>-->
+      <!--<div class="footer"> Twittical: v<span app-version></span></div>-->
+    </div>
   
-  <div class="map-footer"> Twittical: v<span app-version></span></div>
+
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -71,6 +91,9 @@
   <script src="components/angular-sanitize/angular-sanitize.js"></script>
   <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
   <script src="components/highcharts-ng/highcharts-ng.min.js"></script>
+  <script src="components/ngtweet/dist/ngtweet.min.js"></script>
+  <!--<script src="components/angular-bootstrap/ui-bootstrap.js"></script>-->
+  <!--<script src="components/angular-materialize/src/angular-materialize.js"></script>-->
   <script>
 	  $('.navbar li').click(function(e) {
 		    $('.navbar li.active').removeClass('active');

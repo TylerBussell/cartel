@@ -38,7 +38,7 @@ def get_candidate(candidate_name):
 
 def candidate_list(request, candidate_name):
     if request.method == 'GET':
-        candidate = get_candidate(candidate_name).objects.all()[:50]
+        candidate = get_candidate(candidate_name).objects.all()[:30]
         serializer = CandidateSerializer(candidate, many=True)                                                                                                                                      
         return Response(serializer.data)
 
@@ -71,3 +71,52 @@ def democrat_list(request):
 @permission_classes((AllowAny,))
 def republican_list(request):
     return candidate_list(request, 'Republican')
+
+def aggregate_list(request, candidate) :
+    if request.method == 'GET':
+        aggregate = None
+        if candidate is not None:
+            aggregate = Aggregate.objects.filter(candidate = candidate)
+        else:
+            aggregate = Aggregate.objects.all()
+        aggregate = (agg for agg in aggregate if agg.count_neg_sentiment + agg.count_pos_sentiment > 0)
+        serializer = AggregateSerializer(aggregate, many=True)                                                                                                                                      
+        return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_bernie(request):
+    return aggregate_list(request, 'bernie')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_cruz(request):
+    return aggregate_list(request, 'cruz')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_hillary(request):
+    return aggregate_list(request, 'hillary')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_trump(request):
+    return aggregate_list(request, 'trump')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_democrat(request):
+    return aggregate_list(request, 'democrat')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_republican(request):
+    return aggregate_list(request, 'republican')
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def aggregate_all(request):
+    return aggregate_list(request, None)
+
+
+
