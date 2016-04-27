@@ -24,10 +24,10 @@ class KafkaListener(tweepy.StreamListener):
         self.kafka_topic = kafka_topic
         super().__init__()
 
-
     def on_status(self, status):
         data = {
-                'user':status.user.screen_name,
+                'candidate':candidate
+                'uid':status.user.screen_name,
                 'tid': status.id_str,
                 'created_at': str(status.created_at),
                 'text': status.text
@@ -38,7 +38,6 @@ class KafkaListener(tweepy.StreamListener):
 
         with self.kafka_topic.get_producer() as prod:
             prod.produce(bytes(json_data, 'utf-8'))
-
 
     def on_error(self, status_code):
         logger.critical('Error: %s %s' % (status_code, datetime.now()))
