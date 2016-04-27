@@ -10,7 +10,7 @@ from pyspark.streaming.kafka import KafkaUtils
 
 def db_dict(d, sent):
     d.update({'sentiment':sent,'user':d['uid']})
-    return (d['candidate'], d)
+    return d
 
 
 def clean_str(str):
@@ -32,7 +32,7 @@ if __name__ == 'main':
 brokers, topic = sys.argv[1:]
 
 sc = pyspark_cassandra.CassandraSparkContext()
-ssc = StreamingContext(sc, 2)
+ssc = StreamingContext(sc, 1)
 
 kvs = KafkaUtils.createDirectStream(ssc,
                                     [topic],
@@ -41,9 +41,24 @@ kvs = KafkaUtils.createDirectStream(ssc,
 clean_text = kvs.map(lambda x: json.loads(x[1])) \
                 .map(lambda x: (x, clean_str(x['text'])))
 
-preds = clean_text.map(lambda x: db_dict(x[0], predictTweet(x[1])['pos']))
+db_dict = clean_text.map(lambda x: db_dict(x[0], predictTweet(x[1])['pos']))
 
+trump = db_dict.filter(lambda x: x['candidate'] == 'trump')
+hillary = db_dict.filter(lambda x: x['candidate'] == 'hillary')
+bernie = db_dict.filter(lambda x: x['candidate'] == 'bernie')
+zodiac_killer = db_dict.filter(lambda x: x['candidate'] == 'cruz')
+parties = db_dict.filter(lambda x: x['candidate'] == 'parties')
 
-
+if not trump.isEmpty():
+    ssc.saveToCassandra('db', 'trump')
+if not hillary.isEmpty():
+    ssc.saveToCassandra('db', 'hillary')
+if not bernie.isEmpty():
+    ssc.saveToCassandra('db', 'bernie')
+if not zodiac_killer.isEmpty():
+    ssc.saveToCassandra('db', 'cruz')
+if not parties.isEmpty():
+    ssc.saveToCassandra('db', 'parties')
+    
 ssc.start()
 ssc.awaitTermination()
