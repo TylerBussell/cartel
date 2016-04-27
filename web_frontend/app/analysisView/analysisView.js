@@ -161,14 +161,16 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     $scope.createDataSets = function() {
     	$scope.positiveSentimentArray = [];
     	$scope.negativeSentimentArray = [];
+    	$scope.positiveSentimentCountArray = [];
+    	$scope.negativeSentimentCountArray = [];
     	
     	for (var i = 0; i < $scope.chartData.length; i++) {
     		var baseDate = Date.UTC(2016, 3, 16);
     		baseDate = baseDate + ($scope.chartData[i].datetime_block*60*60*1000);
-    		var posDateSentiment = [baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1];
-    		var negDateSentiment = [baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1];
-    		$scope.positiveSentimentArray.push(posDateSentiment);
-    		$scope.negativeSentimentArray.push(negDateSentiment);
+    		$scope.positiveSentimentArray.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
+    		$scope.negativeSentimentArray.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+    		$scope.positiveSentimentCountArray.push([baseDate, $scope.chartData[i].count_pos_sentiment]);
+    		$scope.negativeSentimentCountArray.push([baseDate, $scope.chartData[i].count_neg_sentiment]);
     	}
     }
     
@@ -209,19 +211,22 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	            itemStyle: {
         	            	color: "#FFF"
         	            }
+        	        },
+        	        plotOptions: {
+        	        	column: {
+        	        		stacking: 'normal'
+        	        	}
         	        }
     	        },
-    	        series: [{
-    	        	name: "Negative Sentiment",
-    	        	color: $scope.color,
-    	        	borderColor: $scope.color,
-    	            data: $scope.negativeSentimentArray
-    	        },{
-    	        	name: "Positive Sentiment",
-    	        	color: '#003f74',
-    	        	borderColor: '#003f74',
-    	            data: $scope.positiveSentimentArray
-    	        }],
+    	        xAxis: {
+    	        	labels: {
+	    	        	style: {
+							color: '#FFF'
+						}
+    	        	},
+    	        	type: 'datetime',
+    	            crosshair: true
+    	        },
     	        yAxis: {
     	        	labels: {
 	    	        	style: {
@@ -243,15 +248,17 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 					},
     	            text: 'Public Twitter Opinion of ' + $scope.chartTitle + ' Over Time'
     	        },
-    	        xAxis: {
-    	        	labels: {
-	    	        	style: {
-							color: '#FFF'
-						}
-    	        	},
-    	        	type: 'datetime',
-    	            crosshair: true
-    	        },
+    	        series: [{
+    	        	name: "Positive Tweet Count",
+    	        	color: '#003f74',
+    	        	borderColor: '#003f74',
+    	            data: $scope.positiveSentimentCountArray
+    	        },{
+    	        	name: "Negative Tweet Count",
+    	        	color: $scope.color,
+    	        	borderColor: $scope.color,
+    	            data: $scope.negativeSentimentCountArray
+    	        }],
     	        loading: false
     	    }
     	
@@ -276,15 +283,22 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	            itemStyle: {
         	            	color: "#FFF"
         	            }
+        	        },
+        	        plotOptions: {
+        	        	series: {
+	        	        	marker: {
+	                            enabled: false
+	                        }
+        	        	}
         	        }
     	        },
     	        series: [{
-    	        	name: "Negative Sentiment",
+    	        	name: "Average Negative Sentiment",
     	        	color: $scope.color,
     	        	borderColor: $scope.color,
     	            data: $scope.negativeSentimentArray
     	        },{
-    	        	name: "Positive Sentiment",
+    	        	name: "Average Positive Sentiment",
     	        	color: '#003f74',
     	        	borderColor: '#003f74',
     	            data: $scope.positiveSentimentArray
