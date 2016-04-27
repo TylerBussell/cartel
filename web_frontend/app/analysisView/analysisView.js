@@ -15,6 +15,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	$scope.chartDataLoaded = true;
 	$scope.tweetDataLoaded = true;
 	$scope.dataLoaded = false;
+	$scope.currentChart = null;
 	
 	var view = $routeParams.viewParam;
 	
@@ -26,6 +27,9 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     $scope.chartData = null;
     $scope.tweetData = null;
     $scope.color = null;
+    
+    $scope.startDate =  Date.UTC(2016, 3, 16);
+	$scope.endDate = new Date().getTime();
     
     switch (view) {
     	case "trump":
@@ -240,6 +244,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     
     $scope.buildChartBar = function() {
     	
+    	$scope.currentChart = 'bar';
+    	
     	$scope.createDataSets();
     	
     	Highcharts.setOptions({
@@ -277,7 +283,9 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						}
     	        	},
     	        	type: 'datetime',
-    	            crosshair: true
+    	            crosshair: true,
+    	            min: $scope.startDate,
+    	            max: $scope.endDate
     	        },
     	        yAxis: {
     	        	labels: {
@@ -320,6 +328,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     }
     
     $scope.buildChartLine = function() {
+    	
+    	$scope.currentChart = 'line';
     	
     	$scope.createDataSets();
     	
@@ -386,7 +396,9 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						}
     	        	},
     	        	type: 'datetime',
-    	            crosshair: true
+    	            crosshair: true,
+    	            min: $scope.startDate,
+    	            max: $scope.endDate
     	        },
     	        loading: false
     	    }
@@ -397,6 +409,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     }
     
     $scope.buildChartScatter = function() {
+    	
+    	$scope.currentChart = 'scatter';
     	
     	$scope.createDataSets();
         var datata = []
@@ -472,81 +486,19 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     }
     
     $scope.changeDates = function() {
-    	
-    	$scope.tweetIDs1 = [];
-    	$scope.tweetIDs2 = [];
-    	
-    	var tweetsLength = $scope.tweetData.length
-    	
-    	for (var i = 0; i < tweetsLength; i++) {
-    		if ( i < tweetsLength ) {
-    			$scope.tweetIDs1.push($scope.tweetData[i].tid);
-    		} else {
-    			$scope.tweetIDs2.push($scope.tweetData[i].tid);
-    		}
-    	}	
-    	
-    	$scope.highchartsNG = {
-    	        options: {
-    	            chart: {
-						backgroundColor: 'rgba(5, 5, 5, 0.7)',
-    	                type: 'line',
-    	                marginTop: 75,
-						color: "#f00"
-    	            },
-    	            legend: {
-        	            itemStyle: {
-        	            	color: "#FFF"
-        	            }
-        	        }
-    	        },
-    	        series: [{
-    	        	name: "Avg Sentiment",
-    	        	color: $scope.color,
-    	        	data: [0.25, 0.27, 0.25, 0.3, 0.35, 0.25]
-    	        }],
-    	        yAxis: {
-    	        	labels: {
-	    	        	style: {
-							color: '#FFF'
-						}
-    	        	},
-    	            title: {
-    	                text: 'Sentiment',
-    	                style: {
-							color: '#FFF'
-						}
-    	            }
-    	        },
-    	        title: {
-    	        	y: 20,
-					style: {
-						color: '#FFF'
-					},
-    	            text: 'Public Twitter Opinion of ' + $scope.chartTitle + ' Over Time'
-    	        },
-    	        xAxis: {
-    	        	labels: {
-	    	        	style: {
-							color: '#FFF'
-						}
-    	        	},
-    	            categories: [
-	 	                'April 15',
-		                'April 17',
-		                'April 19',
-		                'April 21',
-		                'April 23',
-		                'April 25'
-    	            ],
-    	            crosshair: true
-    	        },
-    	        loading: false
-    	    }
-    	
-    	$scope.dataLoaded = true;
-    	$scope.hideChart = false;
-
+    	$scope.startDate = Date.parse( $( "#datepickerStart" ).val() );
+    	$scope.endDate = Date.parse( $( "#datepickerEnd" ).val() );
+    	switch ($scope.currentChart) {
+    		case 'line':
+    			$scope.buildChartLine();
+    			break;
+    		case 'bar':
+    			$scope.buildChartBar();
+    			break;
+    		case 'scatter':
+    			alert('Date Change for Scatter Not Supported');
+    			break;
+    	}
     }
     
     $(function() {
