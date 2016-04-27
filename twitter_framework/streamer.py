@@ -5,7 +5,7 @@ from logging.handlers import RotatingFileHandler
 import logging
 import os
 import json
-#import pykafka
+from pykafka import KafkaClient
 import tweepy
 
 logger = logging.getLogger(__name__)
@@ -17,24 +17,28 @@ logger.addHandler(RotatingFileHandler('data/centipede.json', maxBytes=5*(10**8),
 
 
 
-class StreamListener(tweepy.StreamListener):
+class KafkaListener(tweepy.StreamListener):
 
-    def __init__(self, kafka_client):
-        self.client = kafka_client
+
+    def __init__(self, kafka_topic):
+        self.kafka_topic = kafka_topic
         super().__init__()
 
 
     def on_status(self, status):
-        data = {}
+        data = {
+                'user':status.user.screen_name,
+                'tid': status.id_str,
+                'created_at': str(status.created_at),
+                'text': status.text
+                }
 
-        data['uid'] = status.user.screen_name
-        data['tid'] = status.id_str
-        data['created_at'] = str(status.created_at)
-        data['text'] = status.text
-        # client = pykafka.KafkaClient()
-        # topic = client.topics['tweets']
-        # with topic.get_producer() as prod:
-        logger.debug(json.dumps(data))
+        json_data = json.dumps(data)
+        logger.debug(json_data)
+
+        with self.kafka_topic.get_producer() as prod:
+            prod.produce(bytes(json_data, 'utf-8'))
+
 
     def on_error(self, status_code):
         logger.critical('Error: %s %s' % (status_code, datetime.now()))
@@ -53,27 +57,20 @@ class StreamListener(tweepy.StreamListener):
             logger.critical(notice['code'] + notice['message'] + str(datetime.now()))
 
 
-class Streamer:
+class Aggregator:
 
-    def __init__(self, listener, filters):
+
+    def __init__(self, listener, filters, stream=None):
         self.listener = listener
         self.filters = filters
-        self.stream = None
+        self.stream = stream or self._build_stream()
 
     def _build_stream(self):
         auth = tweepy.OAuthHandler(os.getenv('CONSUMER_KEY2'), os.getenv('CONSUMER_SECRET2'))
         auth.set_access_token(os.getenv('API_KEY2'), os.getenv('API_SECRET2'))
-        self.stream = tweepy.Stream(auth=auth, listener=self.listener)
+        return tweepy.Stream(auth=auth, listener=self.listener)
 
 
     def execute(self):
         self.stream.filter(track=self.filters, languages=['en'])
-
-
-
-
-auth = tweepy.OAuthHandler(os.getenv('CONSUMER_KEY2'), os.getenv('CONSUMER_SECRET2'))
-auth.set_access_token(os.getenv('API_KEY2'), os.getenv('API_SECRET2'))
-stream = tweepy.Stream(auth=auth, listener=StreamListener(None))
-stream.filter(track=[], languages=['en'], async=True)
 
