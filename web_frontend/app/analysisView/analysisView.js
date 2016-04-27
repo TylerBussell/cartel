@@ -172,6 +172,27 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	}
     }
     
+    $scope.displayTweets = function() {
+	    $scope.tweetIDs1 = [];
+		$scope.tweetIDs2 = [];
+		
+		var tweetsLength = $scope.tweetData.length
+		
+		$scope.tweetScatterData = [];
+		
+		for (var i = 0; i < tweetsLength; i++) {
+			if ( i < (tweetsLength / 2) ) {
+				$scope.tweetIDs1.push($scope.tweetData[i].tid);
+			} else {
+				$scope.tweetIDs2.push($scope.tweetData[i].tid);
+			}
+			$scope.tweetScatterData.push([$scope.tweetData[i].sentiment.toFixed(2)/1, $scope.tweetData[i].text.length])
+		}	
+		
+		$scope.tweetDataLoaded = false;
+		$scope.dataLoaded = true;
+    }
+    
     $scope.buildChartBar = function() {
     	
     	$scope.createDataSets();
@@ -306,22 +327,71 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 
     }
     
-    $scope.displayTweets = function() {
-	    $scope.tweetIDs1 = [];
-		$scope.tweetIDs2 = [];
-		
-		var tweetsLength = $scope.tweetData.length
-		
-		for (var i = 0; i < tweetsLength; i++) {
-			if ( i < (tweetsLength / 2) ) {
-				$scope.tweetIDs1.push($scope.tweetData[i].tid);
-			} else {
-				$scope.tweetIDs2.push($scope.tweetData[i].tid);
-			}
-		}	
-		
-		$scope.tweetDataLoaded = false;
-		$scope.dataLoaded = true;
+    $scope.buildChartScatter = function() {
+    	
+    	$scope.createDataSets();
+    	
+    	$scope.highchartsNG = {
+    	        options: {
+    	            chart: {
+						backgroundColor: 'rgba(34, 34, 34, 1)',
+    	                type: 'scatter',
+    	                marginTop: 75,
+						color: "#ff5656"
+    	            },
+    	            legend: {
+        	            itemStyle: {
+        	            	color: "#FFF"
+        	            }
+        	        }
+    	        },
+    	        series: [{
+    	        	name: "Latest Tweets",
+    	        	color: $scope.color,
+    	        	borderColor: $scope.color,
+    	            data: $scope.tweetScatterData
+    	        }],
+    	        yAxis: {
+    	        	labels: {
+	    	        	style: {
+							color: '#FFF'
+						}
+    	        	},
+    	            title: {
+    	                text: 'Length',
+    	                style: {
+							color: '#FFF'
+						}
+    	            },
+    	            gridLineColor: 'transparent'
+    	        },
+    	        title: {
+    	        	y: 20,
+					style: {
+						color: '#FFF'
+					},
+    	            text: 'Public Twitter Opinion of ' + $scope.chartTitle + ' Over Time'
+    	        },
+    	        xAxis: {
+    	        	title: {
+    	                text: 'Sentiment',
+    	                style: {
+							color: '#FFF'
+						}
+    	            },
+    	        	labels: {
+	    	        	style: {
+							color: '#FFF'
+						}
+    	        	},
+    	            crosshair: true
+    	        },
+    	        loading: false
+    	    }
+    	
+    	$scope.chartDataLoaded = false;
+    	$scope.dataLoaded = true;
+
     }
     
     $scope.changeDates = function() {
@@ -400,16 +470,6 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	$scope.dataLoaded = true;
     	$scope.hideChart = false;
 
-    }
-    
-    $scope.toggleLine = function() {
-    	$scope.buildChartLine();
-    	//$scope.$apply();
-    }
-    
-    $scope.toggleBar = function() {
-    	$scope.buildChartBar();
-    	//$scope.$apply();
     }
     
     $(function() {
