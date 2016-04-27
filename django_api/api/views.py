@@ -8,76 +8,77 @@ from rest_framework import viewsets, status
 from operator import attrgetter
 
 def get_candidate_instance(candidate_name):
-    if candidate_name == 'Bernie':
+    if candidate_name == 'bernie':
         return Bernie()
-    elif candidate_name == 'Cruz':
+    elif candidate_name == 'cruz':
         return Cruz()
-    elif candidate_name == 'Hillary':
+    elif candidate_name == 'hillary':
         return Hillary()
-    elif candidate_name == 'Trump':
+    elif candidate_name == 'trump':
         return Trump()
-    elif candidate_name == 'Democrat':
+    elif candidate_name == 'democrat':
         return Demo()
-    elif candidate_name == 'Republican':
+    elif candidate_name == 'republican':
         return Rep()
 
 
 def get_candidate(candidate_name):
-    if candidate_name == 'Bernie':
+    if candidate_name == 'bernie':
         return Bernie
-    elif candidate_name == 'Cruz':
+    elif candidate_name == 'cruz':
         return Cruz
-    elif candidate_name == 'Hillary':
+    elif candidate_name == 'hillary':
         return Hillary
-    elif candidate_name == 'Trump':
+    elif candidate_name == 'trump':
         return Trump
-    elif candidate_name == 'Democrat':
+    elif candidate_name == 'democrat':
         return Dem
-    elif candidate_name == 'Republican':
+    elif candidate_name == 'republican':
         return Rep
 
 
 def candidate_list(request, candidate_name):
     if request.method == 'GET':
-        candidate = get_candidate(candidate_name).objects.all()[:30]
+        candidate = get_candidate(candidate_name).objects.filter(candidate=candidate_name).order_by('-created_at')[:50]
+
         serializer = CandidateSerializer(candidate, many=True)                                                                                                                                      
         return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def bernie_list(request):
-    return candidate_list(request, 'Bernie')
+    return candidate_list(request, 'bernie')
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def cruz_list(request):
-    return candidate_list(request, 'Cruz') 
+    return candidate_list(request, 'cruz') 
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def hillary_list(request):
-    return candidate_list(request, 'Hillary')
+    return candidate_list(request, 'hillary')
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def trump_list(request):
-    return candidate_list(request, 'Trump')
+    return candidate_list(request, 'trump')
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def democrat_list(request):
-    return candidate_list(request, 'Democrat')
+    return candidate_list(request, 'democrat')
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 def republican_list(request):
-    return candidate_list(request, 'Republican')
+    return candidate_list(request, 'republican')
 
-def aggregate_list(request, candidate) :
+def aggregate_list(request, candidate_name) :
     if request.method == 'GET':
         aggregate = None
-        if candidate is not None:
-            aggregate = Aggregate.objects.filter(candidate = candidate)
+        if candidate_name is not None:
+            aggregate = Aggregate.objects.filter(candidate = candidate_name)
         else:
             aggregate = Aggregate.objects.all()
         aggregate = (agg for agg in aggregate if agg.count_neg_sentiment + agg.count_pos_sentiment > 0)
@@ -119,15 +120,14 @@ def aggregate_republican(request):
 def aggregate_all(request):
     return aggregate_list(request, None)
 
-def words_list(request, candidate) :
+def words_list(request, candidate_name) :
     if request.method == 'GET':
         words = None
-        if candidate is not None:
-            print('shit')
-            words = Word.objects.filter(candidate = candidate)
+        if candidate_name is not None:
+            words = Word.objects.filter(candidate = candidate_name)
         else:
             words = Word.objects.all()
-        serializer = WordSerializer(words, many=True)
+        serializer = WordSerializer(Word.objects.all(), many=True)
         return Response(serializer.data)
 
 @api_view(['GET'])
