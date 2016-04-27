@@ -28,9 +28,6 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     $scope.tweetData = null;
     $scope.color = null;
     
-    $scope.startDate =  Date.UTC(2016, 3, 16);
-	$scope.endDate = new Date().getTime();
-    
     switch (view) {
     	case "trump":
     		$scope.chartTitle = "Donald Trump";
@@ -412,7 +409,6 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	
     	$scope.currentChart = 'scatter';
     	
-    	$scope.createDataSets();
         var datata = []
     	for (var i = 0 ; i < $scope.tweetScatterDatax.length; i++){
             datata.push({x: $scope.tweetScatterDatax[i], y:$scope.tweetScatterDatay[i], text:$scope.tweetScatterDatatext[i], user:$scope.tweetScatterDatauser[i]});

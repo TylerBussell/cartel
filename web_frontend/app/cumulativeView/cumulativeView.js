@@ -16,6 +16,7 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 	
 	$scope.chartDataLoaded = true;
 	$scope.dataLoaded = false;
+	$scope.currentChart = null;
 	
 	$scope.chartTitle = "All Candidates Compared";
 	cartelAPIAll.queryAll()
@@ -75,6 +76,9 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 	 } 
 	 
 	 $scope.buildCumulativeNegativeChart = function() {
+		 
+		 	$scope.currentChart = 'neg';
+		 
 	    	$scope.highchartsNG = {
 	    	        options: {
 	    	            chart: {
@@ -141,7 +145,9 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 							}
 	    	        	},
 	    	        	type: 'datetime',
-	    	            crosshair: true
+	    	            crosshair: true,
+	    	            min: $scope.startDate,
+	    	            max: $scope.endDate
 	    	        },
 	    	        loading: false
 	    	    }
@@ -149,7 +155,11 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 	    	$scope.chartDataLoaded = false;
 	    	$scope.dataLoaded = true;
 	    }
+	 
 	 	$scope.buildCumulativeCountChart = function() {
+	 		
+	 		$scope.currentChart = 'count';
+	 		
 	    	$scope.highchartsNG = {
 	    	        options: {
 	    	            chart: {
@@ -216,7 +226,9 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 							}
 	    	        	},
 	    	        	type: 'datetime',
-	    	            crosshair: true
+	    	            crosshair: true,
+	    	            min: $scope.startDate,
+	    	            max: $scope.endDate
 	    	        },
 	    	        loading: false
 	    	    }
@@ -224,7 +236,11 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 	    	$scope.chartDataLoaded = false;
 	    	$scope.dataLoaded = true;
 	    }
+	 	
 	 	$scope.buildCumulativePositiveChart = function() {
+	 		
+	 		$scope.currentChart = 'pos';
+	 		
 	    	$scope.highchartsNG = {
 	    	        options: {
 	    	            chart: {
@@ -291,13 +307,31 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 							}
 	    	        	},
 	    	        	type: 'datetime',
-	    	            crosshair: true
+	    	            crosshair: true,
+	    	            min: $scope.startDate,
+	    	            max: $scope.endDate
 	    	        },
 	    	        loading: false
 	    	    }
 	    	
 	    	$scope.chartDataLoaded = false;
 	    	$scope.dataLoaded = true;
+	    }
+	 	
+	 	$scope.changeDates = function() {
+	    	$scope.startDate = Date.parse( $( "#datepickerStart" ).val() );
+	    	$scope.endDate = Date.parse( $( "#datepickerEnd" ).val() );
+	    	switch ($scope.currentChart) {
+	    		case 'neg':
+	    			$scope.buildCumulativeNegativeChart();
+	    			break;
+	    		case 'pos':
+	    			$scope.buildCumulativePositiveChart();
+	    			break;
+	    		case 'count':
+	    			$scope.buildCumulativeCountChart()
+	    			break;
+	    	}
 	    }
 	 	
 	 	$(function() {
