@@ -17,7 +17,8 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <!--<link rel="stylesheet" href="components/angular-bootstrap/ui-bootstrap-csp.css">-->
   <link rel="stylesheet" href="components/font-awesome-4.6.1/css/font-awesome.min.css">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/clouds.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
@@ -29,6 +30,15 @@
   a:link, a:visited, a:hover, a:active {
     text-decoration: none;
     color: white;
+  }
+  nav{
+    height:51px; !important;
+    z-index: 100;
+    background-color: #343434;
+  }
+  nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 51px;
+     line-height: 51px; 
 }
   </style>
 </head>
@@ -39,15 +49,13 @@
 
 
 <nav>
-    <div class="nav-wrapper" style="background-color: #343434">
-      <a id="home" class="navbar-brand" href="#"><img src="img/altlogo.png" alt="Twittical" style="width:170px; height:auto;"></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#analysisView/trump">Trump</a></li>
+    <div class="nav-wrapper" style="background-color: #343434;">
+      <a id="home" class="navbar-brand" href="#"><img src="img/logoalt.png" alt="Twittical" style="width:170px; height:auto; margin-top: -7.5px;"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" style="height:51px!important;">
+            <li><a href="#analysisView/trump">Trump</a></li>
             <li><a href="#analysisView/clinton">Clinton</a></li>
             <li><a href="#analysisView/sanders">Sanders</a></li>
             <li><a href="#analysisView/cruz">Cruz</a></li>
-            <li><a href="#analysisView/democrat">Democrat</a></li>
-            <li><a href="#analysisView/republican">Republican</a></li>
             <li><a href="#view2">How It Works</a></li>
             <li><a href="#teampage">Team</a></li>
       </ul>

@@ -1,5 +1,7 @@
 /* app css stylesheet */
-
+body{
+    font-family: Century Gothic, Helvetica Neue
+}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -57,6 +59,7 @@
 .navbar-default .navbar-nav > .active > a:focus {
     color: #FFF;
     background-color: #820000;
+    height:51px!important;
 }
 
 .map-title {
@@ -146,6 +149,7 @@ psuedo element with clearfix and display: table; , all after (which is why I kno
 }
 html, body {
     height: 100%;
+    top:-2px;
 }
 .wrapper {
     min-height: 100%;
@@ -168,10 +172,11 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/lessPartyBroEdited.jpg') no-repeat;
+    background: url('../img/lessPartyBroEdited.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
+    z-index: 100;
 
 }
 
@@ -183,10 +188,11 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/Trump.jpg') no-repeat;
+    background: url('../img/Trump.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
+    z-index: 100;
 }
 
 .circular-hillary{
@@ -197,7 +203,7 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/crazyClinton.jpg') no-repeat;
+    background: url('../img/crazyClinton.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
@@ -211,7 +217,7 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/Cruz.jpg') no-repeat;
+    background: url('../img/Cruz.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
@@ -225,8 +231,11 @@ html, body {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     display: inline-block;
-    background: url('img/Bernie.jpg') no-repeat;
+    background: url('../img/Bernie.jpg') no-repeat;
     background-size: 100%;
     margin: 0 auto;
     vertical-align:middle;
+}
+.form-control{
+    color: #fff!important;
 }

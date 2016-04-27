@@ -9,11 +9,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
   });
 }])
 
-.controller('AnalysisViewCtrl', ['$scope', 'NgTableParams', 'cartelAPITrump', 'cartelAPIHillary', 'cartelAPIBernie', 'cartelAPICruz', 'cartelAPIDemocrat', 'cartelAPIRepublican', '$http', '$routeParams',
-                                 function($scope, NgTableParams, cartelAPITrump, cartelAPIHillary, cartelAPIBernie, cartelAPICruz, cartelAPIDemocrat, cartelAPIRepublican, $http, $routeParams) {
+.controller('AnalysisViewCtrl', ['$scope', 'NgTableParams', 'cartelAPITrump', 'cartelAPIHillary', 'cartelAPIBernie', 'cartelAPICruz', 'cartelAPIDemocrat', 'cartelAPIRepublican', 'cartelAPITrumpAggregate', '$http', '$routeParams',
+                                 function($scope, NgTableParams, cartelAPITrump, cartelAPIHillary, cartelAPIBernie, cartelAPICruz, cartelAPIDemocrat, cartelAPIRepublican, cartelAPITrumpAggregate, $http, $routeParams) {
 
+	$scope.chartDataLoaded = true;
+	$scope.tweetDataLoaded = true;
 	$scope.dataLoaded = false;
-	$scope.hideChart = true;
 	
 	var view = $routeParams.viewParam;
 	
@@ -22,18 +23,30 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     }
     
     $scope.chartTitle = null;
-    $scope.tableData = null;
+    $scope.chartData = null;
+    $scope.tweetData = null;
     $scope.color = null;
     
     switch (view) {
     	case "trump":
     		$scope.chartTitle = "Donald Trump";
+    		cartelAPITrumpAggregate.queryAll()
+    			.$promise.then(
+	    			function( value ) {
+	    				$scope.chartData = value;
+	    				$scope.color = "#C6151D";
+	    				console.log(value);
+	    				$scope.buildChartBar();
+	    			},
+	    			function( error ) {
+	    				console.log( "Bad Request" );
+	    			}
+	    	);
     		cartelAPITrump.queryAll()
 	    		.$promise.then(
 	    			function( value ) {
-	    				$scope.tableData = value;
-	    				$scope.color = "#C6151D";
-	    				$scope.buildChartBar();
+	    				$scope.tweetData = value;
+	    				$scope.displayTweets();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -45,7 +58,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		cartelAPIHillary.queryAll()
 	    		.$promise.then(
 	    			function( value ) {
-	    				$scope.tableData = value;
+	    				$scope.chartData = value;
 	    				$scope.color = "#C6151D";
 	    				$scope.buildChartBar();
 	    			},
@@ -59,7 +72,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		cartelAPIBernie.queryAll()
 	    		.$promise.then(
 	    			function( value ) {
-	    				$scope.tableData = value;
+	    				$scope.chartData = value;
 	    				$scope.color = "#C6151D";
 	    				$scope.buildChartBar();
 	    			},
@@ -73,7 +86,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		cartelAPICruz.queryAll()
 	    		.$promise.then(
 	    			function( value ) {
-	    				$scope.tableData = value;
+	    				$scope.chartData = value;
 	    				$scope.color = "#C6151D";
 	    				$scope.buildChartBar();
 	    			},
@@ -87,7 +100,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		cartelAPIDemocrat.queryAll()
 	    		.$promise.then(
 	    			function( value ) {
-	    				$scope.tableData = value;
+	    				$scope.chartData = value;
 	    				$scope.color = "#C6151D";
 	    				$scope.buildChartBar();
 	    			},
@@ -101,7 +114,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		cartelAPIRepublican.queryAll()
 	    		.$promise.then(
 	    			function( value ) {
-	    				$scope.tableData = value;
+	    				$scope.chartData = value;
 	    				$scope.color = "#C6151D";
 	    				$scope.buildChartBar();
 	    			},
@@ -114,18 +127,18 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     
     $scope.buildChartBar = function() {
     	
-    	$scope.tweetIDs1 = [];
-    	$scope.tweetIDs2 = [];
-    	
-    	var tweetsLength = $scope.tableData.length
-    	
-    	for (var i = 0; i < tweetsLength; i++) {
-    		if ( i < (tweetsLength / 2) ) {
-    			$scope.tweetIDs1.push($scope.tableData[i].tid);
-    		} else {
-    			$scope.tweetIDs2.push($scope.tableData[i].tid);
-    		}
-    	}	
+//    	$scope.tweetIDs1 = [];
+//    	$scope.tweetIDs2 = [];
+//    	
+//    	var tweetsLength = $scope.tweetData.length
+//    	
+//    	for (var i = 0; i < tweetsLength; i++) {
+//    		if ( i < (tweetsLength / 2) ) {
+//    			$scope.tweetIDs1.push($scope.tableData[i].tid);
+//    		} else {
+//    			$scope.tweetIDs2.push($scope.tableData[i].tid);
+//    		}
+//    	}	
     	
     	$scope.highchartsNG = {
     	        options: {
@@ -133,7 +146,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						backgroundColor: 'rgba(5, 5, 5, 0.7)',
     	                type: 'column',
     	                marginTop: 75,
-						color: "#f00"
+						color: "#ff5656"
     	            },
     	            legend: {
         	            itemStyle: {
@@ -142,10 +155,10 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	        }
     	        },
     	        series: [{
-    	        	name: "Tweets",
+    	        	name: "Avg Sentiment",
     	        	color: $scope.color,
     	        	borderColor: $scope.color,
-    	            data: [10, 15, 12, 8, 7, 1, 15, 10 , 8, 13]
+    	            data: [0.25, 0.3, 0.2, 0.4, 0.2, 0.25]
     	        }],
     	        yAxis: {
     	        	labels: {
@@ -165,7 +178,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 					style: {
 						color: '#FFF'
 					},
-    	            text: 'Sentiment Analysis for ' + $scope.chartTitle
+    	            text: 'Public Twitter Opinion of ' + $scope.chartTitle + ' Over Time'
     	        },
     	        xAxis: {
     	        	labels: {
@@ -174,41 +187,118 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						}
     	        	},
     	            categories: [
-    	                'Jan',
-    	                'Feb',
-    	                'Mar',
-    	                'Apr',
-    	                'May',
-    	                'Jun',
-    	                'Jul',
-    	                'Aug',
-    	                'Sep',
-    	                'Oct',
-    	                'Nov',
-    	                'Dec'
+						'April 1',
+						'April 6',
+						'April 11',
+						'April 16',
+						'April 21',
+						'April 25'
     	            ],
     	            crosshair: true
     	        },
     	        loading: false
     	    }
     	
+    	$scope.chartDataLoaded = false;
     	$scope.dataLoaded = true;
-    	$scope.hideChart = false;
 
     }
     
     $scope.buildChartLine = function() {
     	
+    	$scope.highchartsNG = {
+    	        options: {
+    	            chart: {
+						backgroundColor: 'rgba(5, 5, 5, 0.7)',
+    	                type: 'line',
+    	                marginTop: 75,
+						color: "#ff5656"
+    	            },
+    	            legend: {
+        	            itemStyle: {
+        	            	color: "#FFF"
+        	            }
+        	        }
+    	        },
+    	        series: [{
+    	        	name: "Avg Sentiment",
+    	        	color: $scope.color,
+    	        	data: [0.25, 0.3, 0.2, 0.4, 0.2, 0.25]
+    	        }],
+    	        yAxis: {
+    	        	labels: {
+	    	        	style: {
+							color: '#FFF'
+						}
+    	        	},
+    	            title: {
+    	                text: 'Sentiment',
+    	                style: {
+							color: '#FFF'
+						}
+    	            }
+    	        },
+    	        title: {
+    	        	y: 20,
+					style: {
+						color: '#FFF'
+					},
+    	            text: 'Public Twitter Opinion of ' + $scope.chartTitle + ' Over Time'
+    	        },
+    	        xAxis: {
+    	        	labels: {
+	    	        	style: {
+							color: '#FFF'
+						}
+    	        	},
+    	            categories: [
+     	                'April 1',
+    	                'April 6',
+    	                'April 11',
+    	                'April 16',
+    	                'April 21',
+    	                'April 25'
+    	            ],
+    	            crosshair: true
+    	        },
+    	        loading: false
+    	    }
+    	
+    	$scope.chartDataLoaded = false;
+    	$scope.dataLoaded = true;
+
+    }
+    
+    $scope.displayTweets = function() {
+	    $scope.tweetIDs1 = [];
+		$scope.tweetIDs2 = [];
+		
+		var tweetsLength = $scope.tweetData.length
+		
+		for (var i = 0; i < tweetsLength; i++) {
+			if ( i < (tweetsLength / 2) ) {
+				$scope.tweetIDs1.push($scope.tweetData[i].tid);
+			} else {
+				$scope.tweetIDs2.push($scope.tweetData[i].tid);
+			}
+		}	
+		
+		$scope.tweetDataLoaded = false;
+		$scope.dataLoaded = true;
+    }
+    
+    $scope.changeDates = function() {
+    	
     	$scope.tweetIDs1 = [];
     	$scope.tweetIDs2 = [];
     	
-    	var tweetsLength = $scope.tableData.length
+    	var tweetsLength = $scope.tweetData.length
     	
     	for (var i = 0; i < tweetsLength; i++) {
     		if ( i < (tweetsLength / 2) ) {
-    			$scope.tweetIDs1.push($scope.tableData[i].tid);
+    			$scope.tweetIDs1.push($scope.tweetData[i].tid);
     		} else {
-    			$scope.tweetIDs2.push($scope.tableData[i].tid);
+    			$scope.tweetIDs2.push($scope.tweetData[i].tid);
     		}
     	}	
     	
@@ -227,9 +317,9 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	        }
     	        },
     	        series: [{
-    	        	name: "Tweets",
+    	        	name: "Avg Sentiment",
     	        	color: $scope.color,
-    	            data: [10, 15, 12, 8, 7, 1, 15, 10 , 8, 13]
+    	        	data: [0.25, 0.27, 0.25, 0.3, 0.35, 0.25]
     	        }],
     	        yAxis: {
     	        	labels: {
@@ -249,7 +339,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 					style: {
 						color: '#FFF'
 					},
-    	            text: 'Sentiment Analysis for ' + $scope.chartTitle
+    	            text: 'Public Twitter Opinion of ' + $scope.chartTitle + ' Over Time'
     	        },
     	        xAxis: {
     	        	labels: {
@@ -258,18 +348,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 						}
     	        	},
     	            categories: [
-    	                'Jan',
-    	                'Feb',
-    	                'Mar',
-    	                'Apr',
-    	                'May',
-    	                'Jun',
-    	                'Jul',
-    	                'Aug',
-    	                'Sep',
-    	                'Oct',
-    	                'Nov',
-    	                'Dec'
+	 	                'April 15',
+		                'April 17',
+		                'April 19',
+		                'April 21',
+		                'April 23',
+		                'April 25'
     	            ],
     	            crosshair: true
     	        },
@@ -283,12 +367,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     
     $scope.toggleLine = function() {
     	$scope.buildChartLine();
-    	$scope.$apply();
+    	//$scope.$apply();
     }
     
     $scope.toggleBar = function() {
     	$scope.buildChartBar();
-    	$scope.$apply();
+    	//$scope.$apply();
     }
     
     $(function() {
