@@ -1,8 +1,8 @@
 var twitterServices = angular.module('myApp.cartelServices', ['ngResource']);
-
+var apiURL = 'http://ec2-52-37-162-218.us-west-2.compute.amazonaws.com:8888/api/'
 twitterServices.factory('cartelAPIBernie', ['$resource',
   function($resource){
-    return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/tweets/bernie', {}, {
+    return $resource(apiURL+'tweets/bernie', {}, {
       queryAll: {method:'GET', isArray:true}
     });
   }
@@ -10,7 +10,7 @@ twitterServices.factory('cartelAPIBernie', ['$resource',
 
 twitterServices.factory('cartelAPIBernieAggregate', ['$resource',
     function($resource){
-        return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/aggregate/bernie', {}, {
+        return $resource(apiURL+'aggregate/bernie', {}, {
             queryAll: {method:'GET', isArray:true}
         });
     }
@@ -18,7 +18,7 @@ twitterServices.factory('cartelAPIBernieAggregate', ['$resource',
 
 twitterServices.factory('cartelAPIHillary', ['$resource',
     function($resource){
-		return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/tweets/hillary', {}, {
+		return $resource(apiURL+'tweets/hillary', {}, {
 			queryAll: {method:'GET', isArray:true}
 	    });
 	}
@@ -26,7 +26,7 @@ twitterServices.factory('cartelAPIHillary', ['$resource',
 
 twitterServices.factory('cartelAPIHillaryAggregate', ['$resource',
     function($resource){
-	    return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/aggregate/hillary', {}, {
+	    return $resource(apiURL+'aggregate/hillary', {}, {
             queryAll: {method:'GET', isArray:true}
  	    });
  	}
@@ -34,7 +34,7 @@ twitterServices.factory('cartelAPIHillaryAggregate', ['$resource',
 
 twitterServices.factory('cartelAPITrump', ['$resource',
     function($resource){
-		return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/tweets/trump', {}, {
+		return $resource(apiURL+'tweets/trump', {}, {
 			queryAll: {method:'GET', isArray:true}
 	    });
 	}
@@ -42,7 +42,7 @@ twitterServices.factory('cartelAPITrump', ['$resource',
 
 twitterServices.factory('cartelAPITrumpAggregate', ['$resource',
     function($resource){
-	    return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/aggregate/trump', {}, {
+	    return $resource(apiURL+'aggregate/trump', {}, {
             queryAll: {method:'GET', isArray:true}
    	    });
    	}
@@ -50,7 +50,7 @@ twitterServices.factory('cartelAPITrumpAggregate', ['$resource',
 
 twitterServices.factory('cartelAPICruz', ['$resource',
     function($resource){
-		return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/tweets/cruz', {}, {
+		return $resource(apiURL+'tweets/cruz', {}, {
 			queryAll: {method:'GET', isArray:true}
 	    });
 	}
@@ -58,7 +58,7 @@ twitterServices.factory('cartelAPICruz', ['$resource',
 
 twitterServices.factory('cartelAPICruzAggregate', ['$resource',
     function($resource){
-	    return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/aggregate/cruz', {}, {
+	    return $resource(apiURL+'aggregate/cruz', {}, {
 		    queryAll: {method:'GET', isArray:true}
   	    });
   	}
@@ -66,7 +66,7 @@ twitterServices.factory('cartelAPICruzAggregate', ['$resource',
 
 twitterServices.factory('cartelAPIDemocrat', ['$resource',
     function($resource){
-		return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/tweets/democrat', {}, {
+		return $resource(apiURL+'tweets/democrat', {}, {
 			queryAll: {method:'GET', isArray:true}
 	    });
 	}
@@ -74,7 +74,7 @@ twitterServices.factory('cartelAPIDemocrat', ['$resource',
 
 twitterServices.factory('cartelAPIDemocratAggregate', ['$resource',
     function($resource){
-	    return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/aggregate/democrat', {}, {
+	    return $resource(apiURL+'aggregate/democrat', {}, {
             queryAll: {method:'GET', isArray:true}
   	    });
   	}
@@ -82,7 +82,7 @@ twitterServices.factory('cartelAPIDemocratAggregate', ['$resource',
 
 twitterServices.factory('cartelAPIRepublican', ['$resource',
     function($resource){
-		return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/tweets/republican', {}, {
+		return $resource(apiURL+'tweets/republican', {}, {
 			queryAll: {method:'GET', isArray:true}
 	    });
 	}
@@ -90,7 +90,7 @@ twitterServices.factory('cartelAPIRepublican', ['$resource',
 
 twitterServices.factory('cartelAPIRepublicanAggregate', ['$resource',
 	function($resource){
-		return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/aggregate/republican', {}, {
+		return $resource(apiURL+'aggregate/republican', {}, {
 		    queryAll: {method:'GET', isArray:true}
 		});
 	}
@@ -98,7 +98,7 @@ twitterServices.factory('cartelAPIRepublicanAggregate', ['$resource',
 
 twitterServices.factory('cartelAPIAll', ['$resource',
     function($resource){
-	    return $resource('http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com\:8888/api/aggregate/all', {}, {
+	    return $resource(apiURL+'aggregate/all', {}, {
 	        queryAll: {method:'GET', isArray:true}
  		});
  	}
