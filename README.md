@@ -1,7 +1,6 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/CUBigDataClass/cartel/master/web_frontend/app/img/readme.png">
 </p>
-# Twittical
 [Website](http://ec2-52-39-21-222.us-west-2.compute.amazonaws.com:61621), [REST API] (http://ec2-52-37-162-218.us-west-2.compute.amazonaws.com:8888/api/) + [Endpoint] (https://github.com/CUBigDataClass/cartel/blob/master/django_api/api/urls.py)
 
 We're currently going through a changed election cycle. There's an unprecedented ability to broadcast information to voters, and to organize. Candidates have learned to adapt, some better than others, to this new landscape. Wars are waged across the battlefields of the Internet and we chose to focus on the battle for Twitter. With the unprecedented ability to broadcast information, we've also gained the ability to crowdsource massive amounts of data as the Internet opened up the gates to a 2-way information highway. We collected millions of Tweets over the course of weeks and processed them to try and unlock this information.
@@ -17,6 +16,7 @@ The old adage that any publicity is good publicity seems to hold. The insurgence
 One takeaway that should be noted is that your sentiment analysis is only as good as your preprocessing and nowhere near human intuition. Whilst our sentiment analysis CNN model registered an average of 84% accuracy across 3 different test datasets, it was hard to attribute the sentiment to a specific candidate. Many tweets included were negative attacks towards other candidates, but were ultimately positive towards the candidate mentioned that we attributed it to. So whilst the tweet itself was a negative attack and would register as a negative tweet, it was positive in favour of our candidate. Humans themselves can only agree on sentiment 80% of time for precisely this case, as shown by several studies, so our creations are only as flawed as we are.
 
 ---
+
 ![alt text](https://raw.githubusercontent.com/CUBigDataClass/cartel/master/web_frontend/app/img/techstack.png "Twittical")
 
 # How?
