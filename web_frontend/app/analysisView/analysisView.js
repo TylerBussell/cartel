@@ -408,7 +408,6 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     $scope.buildChartScatter = function() {
     	
     	$scope.currentChart = 'scatter';
-    	
         var datata = []
     	for (var i = 0 ; i < $scope.tweetScatterDatax.length; i++){
             datata.push({x: $scope.tweetScatterDatax[i], y:$scope.tweetScatterDatay[i], text:$scope.tweetScatterDatatext[i], user:$scope.tweetScatterDatauser[i]});
