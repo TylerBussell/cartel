@@ -180,7 +180,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 		
 		var tweetsLength = $scope.tweetData.length
 		
-		$scope.tweetScatterData = [];
+		$scope.tweetScatterDatax = [];
+        $scope.tweetScatterDatay = [];
+        $scope.tweetScatterDatatext = [];
+        $scope.tweetScatterDatauser = [];
+
+
 		
 		for (var i = 0; i < tweetsLength; i++) {
 			if ( i < (tweetsLength / 2) ) {
@@ -188,9 +193,11 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 			} else {
 				$scope.tweetIDs2.push($scope.tweetData[i].tid);
 			}
-			$scope.tweetScatterData.push([$scope.tweetData[i].sentiment.toFixed(2)/1, $scope.tweetData[i].text.length])
+			$scope.tweetScatterDatax.push($scope.tweetData[i].sentiment.toFixed(2)/1)
+            $scope.tweetScatterDatay.push(i);
+            $scope.tweetScatterDatatext.push($scope.tweetData[i].text);
+            $scope.tweetScatterDatauser.push($scope.tweetData[i].user);
 		}	
-		
 		$scope.tweetDataLoaded = false;
 		$scope.dataLoaded = true;
     }
@@ -337,7 +344,10 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     $scope.buildChartScatter = function() {
     	
     	$scope.createDataSets();
-    	
+        var datata = []
+    	for (var i = 0 ; i < $scope.tweetScatterDatax.length; i++){
+            datata.push({x: $scope.tweetScatterDatax[i], y:$scope.tweetScatterDatay[i], text:$scope.tweetScatterDatatext[i], user:$scope.tweetScatterDatauser[i]});
+        }
     	$scope.highchartsNG = {
     	        options: {
     	            chart: {
@@ -350,27 +360,29 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	            itemStyle: {
         	            	color: "#FFF"
         	            }
-        	        }
+        	        },
+                    tooltip: {
+                        formatter: function () {
+                        var s = '<b>@'+this.point.user+'</b>: ' + this.point.text;
+
+                        return s;
+                    },
+                    shared: true,
+                    enabled: true
+
+                    }
     	        },
     	        series: [{
-    	        	name: "Latest Tweets",
+    	        	name: "Tweet",
     	        	color: $scope.color,
     	        	borderColor: $scope.color,
-    	            data: $scope.tweetScatterData
+    	            data: datata
     	        }],
     	        yAxis: {
-    	        	labels: {
-	    	        	style: {
-							color: '#FFF'
-						}
-    	        	},
-    	            title: {
-    	                text: 'Length',
-    	                style: {
-							color: '#FFF'
-						}
-    	            },
-    	            gridLineColor: 'transparent'
+    	            gridLineColor: 'transparent',
+                    visible: false,
+                    min:-1,
+                    max:51
     	        },
     	        title: {
     	        	y: 20,
@@ -391,8 +403,11 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 							color: '#FFF'
 						}
     	        	},
-    	            crosshair: true
+    	            crosshair: true,
+                    min:-0.05,
+                    max:1.05
     	        },
+
     	        loading: false
     	    }
     	
