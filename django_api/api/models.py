@@ -58,3 +58,11 @@ class Aggregate(Model):
     avg_pos_sentiment = columns.Float(required=False)
     avg_neg_sentiment = columns.Float(required=False)
 
+class Word(Model):
+    __table_name__ = 'word'
+
+    candidate = columns.Text(required=True, primary_key = True)
+    text = columns.Text(required=True, primary_key = True)
+    count = columns.Integer(required=False) 
+    tf = columns.Float(required=False)
+

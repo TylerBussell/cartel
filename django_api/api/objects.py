@@ -77,3 +77,19 @@ class AggregateObject(object):
         self.count_neg_sentiment = count_neg_sentiment
         self.avg_pos_sentiment = avg_pos_sentiment
         self.avg_neg_sentiment = avg_neg_sentiment
+
+class WordObject(object):
+
+    def __init__(self, subject, content, **attrs):
+        if 'candidate' in attrs:
+            self.candidate = attrs['candidate']
+        if 'text' in attrs:
+            self.text = attrs['text']
+        if 'count' in attrs:
+            self.candidate = attrs['count']
+        if 'tf' in attrs:
+            self.candidate = attrs['tf']
+        self.candidate = candidate
+        self.text = text
+        self.count = count
+        self.tf = tf

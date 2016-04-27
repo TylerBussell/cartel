@@ -5,6 +5,7 @@ from api.models import *
 from api.serializers import *
 from rest_framework.response import Response
 from rest_framework import viewsets, status
+from operator import attrgetter
 
 def get_candidate_instance(candidate_name):
     if candidate_name == 'Bernie':
@@ -118,5 +119,19 @@ def aggregate_republican(request):
 def aggregate_all(request):
     return aggregate_list(request, None)
 
+def words_list(request, candidate) :
+    if request.method == 'GET':
+        words = None
+        if candidate is not None:
+            words = Word.objects.filter(candidate = candidate)
+        else:
+            words = Word.objects.all()
+        serializer = WordSerializer(Word.objects.all(), many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def words_hillary(request):
+    return words_list(request, 'hillary')
 
 

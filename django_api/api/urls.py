@@ -18,4 +18,5 @@ urlpatterns = [
     url(r'^aggregate/democrat/$', views.aggregate_democrat, name='aggregate_list'),
     url(r'^aggregate/republican/$', views.aggregate_republican, name='aggregate_list'),
     url(r'^aggregate/all/$', views.aggregate_all, name='aggregate_list'),
+    url(r'^words/hillary/$', views.words_hillary, name='words_list'),
 ]
