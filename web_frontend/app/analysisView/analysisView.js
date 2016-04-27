@@ -550,7 +550,17 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     }
     
     $(function() {
-        $( "#datepickerStart" ).datepicker( { dateFormat: 'dd-mm-yy' } );
-        $( "#datepickerEnd" ).datepicker( { dateFormat: 'dd-mm-yy' } );
+//        $( "#datepickerStart" ).datepicker( { dateFormat: 'dd-mm-yy' } );
+//        $( "#datepickerEnd" ).datepicker( { dateFormat: 'dd-mm-yy' } );
+    	$( "#datepickerStart" ).datetimepicker({
+    		showMinute: false,
+    		minDate: new Date(2016, 3, 16, 0, 0),
+    		maxDate: new Date()
+    	});
+    	$( "#datepickerEnd" ).datetimepicker({
+    		showMinute: false,
+    		minDate: new Date(2016, 3, 16, 0, 0),
+    		maxDate: new Date()
+    	});
     });
 }]);
