@@ -32,9 +32,13 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 	
 	 $scope.createCumulativeDataArray = function() {
 	    	$scope.trumpNegativeCumulative = [];
+	    	$scope.trumpTweetCumulative = [];
 	    	$scope.clintonNegativeCumulative = [];
+	    	$scope.clintonTweetCumulative = [];
 	    	$scope.sandersNegativeCumulative = [];
+	    	$scope.sandersTweetCumulative = [];
 	    	$scope.cruzNegativeCumulative = [];
+	    	$scope.cruzTweetCumulative = [];
 	    	$scope.trumpPositiveCumulative = [];
 	    	$scope.clintonPositiveCumulative = [];
 	    	$scope.sandersPositiveCumulative = [];
@@ -48,18 +52,22 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 	    			case "trump":
 	    				$scope.trumpPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
 	    	    		$scope.trumpNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+	    	    		$scope.trumpTweetCumulative.push([baseDate, $scope.chartData[i].count_pos_sentiment+$scope.chartData[i].count_neg_sentiment]);
 	    	    		break;
 	    			case "bernie":
 	    				$scope.sandersPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
 	    	    		$scope.sandersNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+	    	    		$scope.sandersTweetCumulative.push([baseDate, $scope.chartData[i].count_pos_sentiment+$scope.chartData[i].count_neg_sentiment]);
 	    	    		break;
 	    			case "hillary":
 	    				$scope.clintonPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
 	    	    		$scope.clintonNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+	    	    		$scope.clintonTweetCumulative.push([baseDate, $scope.chartData[i].count_pos_sentiment+$scope.chartData[i].count_neg_sentiment]);
 	    	    		break;
 	    			case "cruz":
 	    				$scope.cruzPositiveCumulative.push([baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1]);
 	    	    		$scope.cruzNegativeCumulative.push([baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1]);
+	    	    		$scope.cruzTweetCumulative.push([baseDate, $scope.chartData[i].count_pos_sentiment+$scope.chartData[i].count_neg_sentiment]);
 	    	    		break;
 	    		}
 	    	}
@@ -141,7 +149,81 @@ angular.module('myApp.cumulativeView', ['ngRoute', 'highcharts-ng', "ngTable", '
 	    	$scope.chartDataLoaded = false;
 	    	$scope.dataLoaded = true;
 	    }
-	 
+	 	$scope.buildCumulativeCountChart = function() {
+	    	$scope.highchartsNG = {
+	    	        options: {
+	    	            chart: {
+							backgroundColor: 'rgba(34, 34, 34, 1)',
+	    	                type: 'line',
+	    	                marginTop: 75,
+							color: "#ff5656"
+	    	            },
+	    	            legend: {
+	        	            itemStyle: {
+	        	            	color: "#FFF"
+	        	            }
+	        	        },
+	        	        plotOptions: {
+	        	        	series: {
+		        	        	marker: {
+		                            enabled: false
+		                        }
+	        	        	}
+	        	        },
+	        	        tooltip: {
+	        	            shared:true
+	        	        }
+	    	        },
+	    	        series: [{
+	    	        	name: "Trump Avg Tweet Count",
+	    	            data: $scope.trumpTweetCumulative
+	    	        },{
+	    	        	name: "Bernie Avg Tweet Count",
+	    	            data: $scope.sandersTweetCumulative
+	    	        },
+	    	        {
+	    	        	name: "Clinton Avg Tweet Count",
+	    	            data: $scope.clintonTweetCumulative
+	    	        },{
+	    	        	name: "Cruz Avg Tweet Count",
+	    	            data: $scope.cruzTweetCumulative
+	    	        }],
+	    	        yAxis: {
+	    	        	labels: {
+		    	        	style: {
+								color: '#FFF'
+							}
+	    	        	},
+	    	            title: {
+	    	                text: '# of Tweets',
+	    	                style: {
+								color: '#FFF'
+							}
+	    	            },
+	    	            gridLineColor: 'transparent'
+	    	        },
+	    	        title: {
+	    	        	y: 20,
+						style: {
+							color: '#FFF'
+						},
+	    	            text: 'Average Tweet Counts of ' + $scope.chartTitle + ' Over Time'
+	    	        },
+	    	        xAxis: {
+	    	        	labels: {
+		    	        	style: {
+								color: '#FFF'
+							}
+	    	        	},
+	    	        	type: 'datetime',
+	    	            crosshair: true
+	    	        },
+	    	        loading: false
+	    	    }
+	    	
+	    	$scope.chartDataLoaded = false;
+	    	$scope.dataLoaded = true;
+	    }
 	 	$scope.buildCumulativePositiveChart = function() {
 	    	$scope.highchartsNG = {
 	    	        options: {
