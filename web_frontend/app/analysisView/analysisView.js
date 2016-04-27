@@ -199,6 +199,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	
     	$scope.createDataSets();
     	
+    	Highcharts.setOptions({
+    	    lang: {
+    	    	thousandsSep: ','
+    	    }
+    	});
+    	
     	$scope.highchartsNG = {
     	        options: {
     	            chart: {
@@ -216,6 +222,9 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	        	column: {
         	        		stacking: 'normal'
         	        	}
+        	        },
+        	        tooltip: {
+        	            shared:true
         	        }
     	        },
     	        xAxis: {
@@ -290,18 +299,21 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 	                            enabled: false
 	                        }
         	        	}
+        	        },
+        	        tooltip: {
+        	            shared:true
         	        }
     	        },
     	        series: [{
-    	        	name: "Average Negative Sentiment",
-    	        	color: $scope.color,
-    	        	borderColor: $scope.color,
-    	            data: $scope.negativeSentimentArray
-    	        },{
     	        	name: "Average Positive Sentiment",
     	        	color: '#003f74',
     	        	borderColor: '#003f74',
     	            data: $scope.positiveSentimentArray
+    	        },{
+    	        	name: "Average Negative Sentiment",
+    	        	color: $scope.color,
+    	        	borderColor: $scope.color,
+    	            data: $scope.negativeSentimentArray
     	        }],
     	        yAxis: {
     	        	labels: {
@@ -416,7 +428,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	var tweetsLength = $scope.tweetData.length
     	
     	for (var i = 0; i < tweetsLength; i++) {
-    		if ( i < (tweetsLength / 2) ) {
+    		if ( i < tweetsLength ) {
     			$scope.tweetIDs1.push($scope.tweetData[i].tid);
     		} else {
     			$scope.tweetIDs2.push($scope.tweetData[i].tid);
