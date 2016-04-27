@@ -69,10 +69,8 @@ if not parties.isEmpty():
         dem_db = dem.map(lambda x: update_cand(x, 'democrat'))
         dem_db.saveToCassandra('db', 'democrat')
     if not gop.isEmpty():
-        gop_db = dem.map(lambda x: update_cand(x, 'republican'))
+        gop_db = gop.map(lambda x: update_cand(x, 'republican'))
         gop_db.saveToCassandra('db', 'republican')
-
-    ssc.saveToCassandra('db', 'parties')
 
 ssc.start()
 ssc.awaitTermination()
