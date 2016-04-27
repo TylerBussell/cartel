@@ -1,13 +1,9 @@
-# CARTeL
+# Twittical
 
-# Getting Started
+![alt text](https://raw.githubusercontent.com/CUBigDataClass/cartel/master/web_frontend/app/img/logo_background.png "Twittical")
 
-## Django
-1. Install cassandra
-2. Install dependencies: "pip3 install -r dependencies.txt"
-3. Sync DB: "python3 manage.py sync_cassandra"
-4. Runserver: "python3 manage.py runserver"
+[Website](http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com:61621/)
 
-# Dependencies
+[REST API] (http://ec2-52-38-210-101.us-west-2.compute.amazonaws.com:8888/api/) + [Endpoint] (https://github.com/CUBigDataClass/cartel/blob/master/django_api/api/urls.py)
 
-Check dependencies.txt
+

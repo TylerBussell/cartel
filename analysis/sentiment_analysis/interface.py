@@ -7,9 +7,9 @@ import pickle
 
 
 # config variables
-model      = "sample/third.p"
-preprocess = True
-load_word_vecs = True
+model      = "/home/ubuntu/cartel/analysis/sentiment_analysis/sample/third.p"
+preprocess = False
+load_word_vecs = False
 
 def predictTweet(string):
     tweet=string.lower()
