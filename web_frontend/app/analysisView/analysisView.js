@@ -283,6 +283,13 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	            itemStyle: {
         	            	color: "#FFF"
         	            }
+        	        },
+        	        plotOptions: {
+        	        	series: {
+	        	        	marker: {
+	                            enabled: false
+	                        }
+        	        	}
         	        }
     	        },
     	        series: [{
