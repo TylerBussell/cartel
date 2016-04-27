@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/CUBigDataClass/cartel/master/web_frontend/app/img/frontpage.png "Twittical")
+![alt text](https://raw.githubusercontent.com/CUBigDataClass/cartel/master/web_frontend/app/img/readme.png "Twittical")
 
 # Twittical
 [Website](http://ec2-52-39-21-222.us-west-2.compute.amazonaws.com:61621)
