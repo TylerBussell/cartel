@@ -9,8 +9,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
   });
 }])
 
-.controller('AnalysisViewCtrl', ['$scope', 'NgTableParams', 'cartelAPITrump', 'cartelAPIHillary', 'cartelAPIBernie', 'cartelAPICruz', 'cartelAPIDemocrat', 'cartelAPIRepublican', 'cartelAPITrumpAggregate', '$http', '$routeParams',
-                                 function($scope, NgTableParams, cartelAPITrump, cartelAPIHillary, cartelAPIBernie, cartelAPICruz, cartelAPIDemocrat, cartelAPIRepublican, cartelAPITrumpAggregate, $http, $routeParams) {
+.controller('AnalysisViewCtrl', ['$scope', 'NgTableParams', 'cartelAPITrump', 'cartelAPIHillary', 'cartelAPIBernie', 'cartelAPICruz', 'cartelAPIDemocrat', 'cartelAPIRepublican', 'cartelAPITrumpAggregate', 'cartelAPIHillaryAggregate', 'cartelAPIBernieAggregate', 'cartelAPICruzAggregate', '$http', '$routeParams',
+                                 function($scope, NgTableParams, cartelAPITrump, cartelAPIHillary, cartelAPIBernie, cartelAPICruz, cartelAPIDemocrat, cartelAPIRepublican, cartelAPITrumpAggregate, cartelAPIHillaryAggregate, cartelAPIBernieAggregate, cartelAPICruzAggregate, $http, $routeParams) {
 
 	$scope.chartDataLoaded = true;
 	$scope.tweetDataLoaded = true;
@@ -55,12 +55,23 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		break;
     	case "clinton":
     		$scope.chartTitle = "Hillary Clinton";
-    		cartelAPIHillary.queryAll()
-	    		.$promise.then(
+    		cartelAPIHillaryAggregate.queryAll() 
+    			.$promise.then(
 	    			function( value ) {
 	    				$scope.chartData = value;
 	    				$scope.color = "#C6151D";
+	    				console.log(value);
 	    				$scope.buildChartBar();
+	    			},
+	    			function( error ) {
+	    				console.log( "Bad Request" );
+	    			}
+	    	);
+    		cartelAPIHillary.queryAll()
+	    		.$promise.then(
+	    			function( value ) {
+	    				$scope.tweetData = value;
+	    				$scope.displayTweets();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -69,12 +80,23 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		break;
     	case "sanders":
     		$scope.chartTitle = "Bernie Sanders";
-    		cartelAPIBernie.queryAll()
-	    		.$promise.then(
+    		cartelAPIBernieAggregate.queryAll()
+    			.$promise.then(
 	    			function( value ) {
 	    				$scope.chartData = value;
 	    				$scope.color = "#C6151D";
+	    				console.log(value);
 	    				$scope.buildChartBar();
+	    			},
+	    			function( error ) {
+	    				console.log( "Bad Request" );
+	    			}
+	    	);
+    		cartelAPIBernie.queryAll()
+	    		.$promise.then(
+	    			function( value ) {
+	    				$scope.tweetData = value;
+	    				$scope.displayTweets();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -83,12 +105,23 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		break;
     	case "cruz":
     		$scope.chartTitle = "Ted Cruz";
-    		cartelAPICruz.queryAll()
-	    		.$promise.then(
+    		cartelAPICruzAggregate.queryAll()
+    			.$promise.then(
 	    			function( value ) {
 	    				$scope.chartData = value;
 	    				$scope.color = "#C6151D";
+	    				console.log(value);
 	    				$scope.buildChartBar();
+	    			},
+	    			function( error ) {
+	    				console.log( "Bad Request" );
+	    			}
+	    	);
+    		cartelAPICruz.queryAll()
+	    		.$promise.then(
+	    			function( value ) {
+	    				$scope.tweetData = value;
+	    				$scope.displayTweets();
 	    			},
 	    			function( error ) {
 	    				console.log( "Bad Request" );
@@ -125,25 +158,28 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     		break;
     }
     
+    $scope.createDataSets = function() {
+    	$scope.positiveSentimentArray = [];
+    	$scope.negativeSentimentArray = [];
+    	
+    	for (var i = 0; i < $scope.chartData.length; i++) {
+    		var baseDate = Date.UTC(2016, 3, 16);
+    		baseDate = baseDate + ($scope.chartData[i].datetime_block*60*60*1000);
+    		var posDateSentiment = [baseDate, $scope.chartData[i].avg_pos_sentiment.toFixed(3)/1];
+    		var negDateSentiment = [baseDate, $scope.chartData[i].avg_neg_sentiment.toFixed(3)/1];
+    		$scope.positiveSentimentArray.push(posDateSentiment);
+    		$scope.negativeSentimentArray.push(negDateSentiment);
+    	}
+    }
+    
     $scope.buildChartBar = function() {
     	
-//    	$scope.tweetIDs1 = [];
-//    	$scope.tweetIDs2 = [];
-//    	
-//    	var tweetsLength = $scope.tweetData.length
-//    	
-//    	for (var i = 0; i < tweetsLength; i++) {
-//    		if ( i < (tweetsLength / 2) ) {
-//    			$scope.tweetIDs1.push($scope.tableData[i].tid);
-//    		} else {
-//    			$scope.tweetIDs2.push($scope.tableData[i].tid);
-//    		}
-//    	}	
+    	$scope.createDataSets();
     	
     	$scope.highchartsNG = {
     	        options: {
     	            chart: {
-						backgroundColor: 'rgba(5, 5, 5, 0.7)',
+						backgroundColor: 'rgba(34, 34, 34, 1)',
     	                type: 'column',
     	                marginTop: 75,
 						color: "#ff5656"
@@ -155,10 +191,15 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	        }
     	        },
     	        series: [{
-    	        	name: "Avg Sentiment",
+    	        	name: "Negative Sentiment",
     	        	color: $scope.color,
     	        	borderColor: $scope.color,
-    	            data: [0.25, 0.3, 0.2, 0.4, 0.2, 0.25]
+    	            data: $scope.negativeSentimentArray
+    	        },{
+    	        	name: "Positive Sentiment",
+    	        	color: '#003f74',
+    	        	borderColor: '#003f74',
+    	            data: $scope.positiveSentimentArray
     	        }],
     	        yAxis: {
     	        	labels: {
@@ -171,7 +212,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	                style: {
 							color: '#FFF'
 						}
-    	            }
+    	            },
+    	            gridLineColor: 'transparent'
     	        },
     	        title: {
     	        	y: 20,
@@ -186,14 +228,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 							color: '#FFF'
 						}
     	        	},
-    	            categories: [
-						'April 1',
-						'April 6',
-						'April 11',
-						'April 16',
-						'April 21',
-						'April 25'
-    	            ],
+    	        	type: 'datetime',
     	            crosshair: true
     	        },
     	        loading: false
@@ -206,10 +241,12 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     
     $scope.buildChartLine = function() {
     	
+    	$scope.createDataSets();
+    	
     	$scope.highchartsNG = {
     	        options: {
     	            chart: {
-						backgroundColor: 'rgba(5, 5, 5, 0.7)',
+						backgroundColor: 'rgba(34, 34, 34, 1)',
     	                type: 'line',
     	                marginTop: 75,
 						color: "#ff5656"
@@ -221,9 +258,15 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
         	        }
     	        },
     	        series: [{
-    	        	name: "Avg Sentiment",
+    	        	name: "Negative Sentiment",
     	        	color: $scope.color,
-    	        	data: [0.25, 0.3, 0.2, 0.4, 0.2, 0.25]
+    	        	borderColor: $scope.color,
+    	            data: $scope.negativeSentimentArray
+    	        },{
+    	        	name: "Positive Sentiment",
+    	        	color: '#003f74',
+    	        	borderColor: '#003f74',
+    	            data: $scope.positiveSentimentArray
     	        }],
     	        yAxis: {
     	        	labels: {
@@ -236,7 +279,8 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
     	                style: {
 							color: '#FFF'
 						}
-    	            }
+    	            },
+    	            gridLineColor: 'transparent'
     	        },
     	        title: {
     	        	y: 20,
@@ -251,14 +295,7 @@ angular.module('myApp.analysisView', ['ngRoute', 'highcharts-ng', "ngTable", 'ng
 							color: '#FFF'
 						}
     	        	},
-    	            categories: [
-     	                'April 1',
-    	                'April 6',
-    	                'April 11',
-    	                'April 16',
-    	                'April 21',
-    	                'April 25'
-    	            ],
+    	        	type: 'datetime',
     	            crosshair: true
     	        },
     	        loading: false
