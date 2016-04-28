@@ -1,5 +1,5 @@
 var twitterServices = angular.module('myApp.cartelServices', ['ngResource']);
-var apiURL = 'http://ec2-52-37-162-218.us-west-2.compute.amazonaws.com:8888/api/'
+var apiURL = 'http://ec2-52-32-222-112.us-west-2.compute.amazonaws.com:8888/api/'
 twitterServices.factory('cartelAPIBernie', ['$resource',
   function($resource){
     return $resource(apiURL+'tweets/bernie', {}, {
