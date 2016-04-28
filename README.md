@@ -21,15 +21,25 @@ One takeaway that should be noted is that your sentiment analysis is only as goo
 
 # How?
 
-## Spark + GNIP
+## Twitter Streaming API
+
+For realtime data collection
 
 ## Kafka
 
+To collect Tweets from the Twitter Streaming API and pass them to spark
+
+## Spark batch and stream processing
+
+For managing sentiment processing of tweets and inserting data into cassandra
+
 ## Cassandra
+
+To store raw tweets and aggregates of hourly tweet statistics for each presidential candidate
 
 ## Django
 
-Backend and connector to Cassandra. Made heavy use of Django's ORM to serve up data to the front-end.
+Backend and connector to Cassandra. Made heavy use of Django's ORM to serve up data to the front-end. Implemented REST API for frontend and general public(Yeah we have a public API) use.
 
 ## LSTM language model with CNN
 CNN (Convolutional Neural Network) based text classifier, based off [this](http://arxiv.org/abs/1408.5882) and [this](https://github.com/flipkart-incubator/optimus), trained on 100k+ tweets with consistent accuracy of 84% across 3 unique test sets. We ran this on a Compute-Optimized instance on AWS leveraging Theano to make the computational burden significantly less. After the model was complete, we created an interface so we can easily send sentiment data to our Spark processing jobs. You can learn more about the model used [here](https://github.com/CUBigDataClass/cartel/blob/master/analysis/sentiment_analysis/README.md).
