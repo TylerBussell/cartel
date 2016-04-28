@@ -27,15 +27,16 @@ For realtime data collection
 
 ## Kafka
 
-To collect Tweets from the Twitter Streaming API and pass them to spark
+Kafka allowed for decoupling of data aggregation and processing. This allowed us to use more computationally expensive sentiment analysis model which resulted in better analysis.
 
 ## Spark batch and stream processing
 
-For managing sentiment processing of tweets and inserting data into cassandra
+Spark's Kafka DirectStream allowed for easy consumption from our Kafka brokers without the need for ZooKeeper. While not completely realtime, the minibatch processing model that Spark Streaming
+provided was a good compromise between speed and analytical power. Spark also allowed for large batch jobs that didn't need to be done in real time. 
 
 ## Cassandra
 
-To store raw tweets and aggregates of hourly tweet statistics for each presidential candidate
+To store raw tweets and aggregates of hourly tweet statistics for each presidential candidate.
 
 ## Django
 
